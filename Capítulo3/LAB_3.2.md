@@ -1,12 +1,12 @@
-# Laboratorio 3.2. Despliegue, Monitoreo y Evaluación de Modelos
+# Laboratorio 3.2. Despliegue, Monitoreo y Evaluación de Modelos.
 
 ## Objetivo de la práctica:
 Al finalizar la práctica, serás capaz de:
-- Implementar un modelo simulado en mabiente productivo.
+- Implementar un modelo simulado en ambiente productivo.
 - Configurar el Monitoreo de Métricas.
 - Monitorear el Rendimiento del Modelo.
 
-## Objetivo Visual 
+## Objetivo Visual:
 
 ![diagrama1](../images/imgl5/img0.png)
 
@@ -14,42 +14,41 @@ Al finalizar la práctica, serás capaz de:
 - 105 minutos.
 
 ## **Prerrequisitos:**
-
 - Una suscripción a Azure.
 - Conocimientos básicos de Python y Machine Learning.
 - Conocimiento básico de Azure Monitor y Application Insights.
 
-## Instrucciones 
+## Instrucciones:
 
-### Tarea 1. Configuración del Entorno en Azure Machine Learning
+### Tarea 1. Configuración del Entorno en Azure Machine Learning.
 
-En este paso, configurarás tu entorno de trabajo para monitorear y evaluar modelos en producción. Te enfocarás en instalar las librerías necesarias en un cuaderno Jupyter.
+En este paso, configura tu entorno de trabajo para monitorear y evaluar modelos en producción. Enfócate en instalar las librerías necesarias en un cuaderno Jupyter.
 
 1. Dirígete al Portal de Azure e inicia sesión con tu cuenta en [Azure Portal](https://portal.azure.com/).
 
 2. En la barra de búsqueda del portal, escribe **`Machine Learning`** y selecciona **`Machine Learning`**.
 
-3. Usa el **Workspace** de Azure Machine Learning **existente** creado previamente.
+3. Usa el **Workspace** de Azure Machine Learning **existente**, el cual ha sido creado previamente.
 
-4. Haz clic en **Launch Studio**.
+4. Haz clic en **`Launch Studio`**.
 
-5. Dentro de tu workspace, selecciona **Notebooks** del menú lateral izquierdo.
+5. Dentro de tu workspace, selecciona **`Notebooks`** del menú lateral izquierdo.
 
 ![mlnote](../images/imgl5/img1.png)
 
-6. En tu carpeta **raíz**, haz clic en los 3 puntos para expandir el menú y selecciona **Create new folder**.
+6. En tu carpeta **raíz**, haz clic en los tres puntos para expandir el menú y selecciona **`Create new folder`**.
 
 ![mlnote1](../images/imgl5/img2.png)
 
-7. Escribe el siguiente nombre **`monitor-model-notebook`** y haz clic en el botón **Create**.
+7. Escribe el siguiente nombre: **`monitor-model-notebook`**, y haz clic en el botón **`Create`**.
 
 ![mlnot2](../images/imgl5/img3.png)
 
-8. Ahora repite los pasos, pero selecciona la carpeta creada y crea un archivo llamado **`monitor`** de tipo **Notebook**.
+8. Repite los pasos, pero selecciona la carpeta creada y crea un archivo llamado **`monitor`** de tipo **Notebook**.
 
 ![mlnot3](../images/imgl5/img4.png)
 
-9. Haz clic en el botón **Create**.
+9. Haz clic en el botón **`Create`**.
 
 10. En el cuaderno, ejecuta las siguientes celdas para instalar las librerías requeridas:
 
@@ -66,11 +65,11 @@ Has preparado tu entorno de trabajo para el monitoreo de modelos en producción.
 
 > **¡TAREA FINALIZADA!**
 
-### Tarea 2. Implementación del Modelo en Producción
+### Tarea 2. Implementación del Modelo en Producción.
 
-En esta tarea, entrenarás un modelo de regresión utilizando el conjunto de datos **California Housing**, lo registrarás en tu Workspace y lo desplegarás como un servicio web en Azure Machine Learning.
+En esta tarea, entrena un modelo de regresión utilizando el conjunto de datos **California Housing**, regístralo en tu Workspace y despliégalo como un servicio web en Azure Machine Learning.
 
-1. Utilizarás un modelo de regresión lineal para predecir el valor de las viviendas. Escribe el siguiente código en la celda siguiente:
+1. Utiliza un modelo de regresión lineal para predecir el valor de las viviendas. Escribe el siguiente código en la celda siguiente:
 
 ```
 import pandas as pd
@@ -104,7 +103,7 @@ joblib.dump(model, 'model.pkl')
 
 ![mlnot4](../images/imgl5/img5.png)
 
-2. Ahora registra el modelo en tu **Workspace**. Escribe el siguiente código en otra celda:
+2. Posteriormente, registra el modelo en tu **Workspace**. Escribe el siguiente código en otra celda:
 
 ```
 from azureml.core import Workspace, Model
@@ -122,13 +121,13 @@ model = Model.register(model_path="model.pkl",  # Ruta al archivo del modelo
 
 3.  Crea el siguiente script de python llamado **score.py**.
 
-4.  Dentro de tu carpeta **monitor-model-notebook** clic en los 3 puntos para abrir el menu y seleccionar **Create new file**, en la ventana emergente escribe: **`score.py`** de tipo **Python**.
+4.  Dentro de tu carpeta **monitor-model-notebook**, da clic en los tres puntos para abrir el menú y selecciona **`Create new file`**; en la ventana emergente escribe: **`score.py`** de tipo **Python**.
 
 ![mlnot4](../images/imgl5/img7.png)
 
-5.  Clic en el boton **Create**.
+5.  Clic en el boton **`Create`**.
 
-6.  Dentro del archivo escribe el siguiente codigo que define cómo se cargará el modelo y cómo se realizarán las predicciones y guardalo.
+6.  Dentro del archivo escribe el siguiente código que define cómo se cargará el modelo y se realizarán las predicciones y guárdalo.
 
 ```
 import joblib
@@ -155,7 +154,7 @@ def run(raw_data):
         return {"error": str(e)}
 ```
 
-7. De regreso a tu libreta, en la siguiente celda, escribe el siguiente código que define el entorno con las dependencias necesarias para el modelo.
+7. De regreso a tu libreta, en la siguiente celda, escribe el siguiente código que define el entorno con las dependencias necesarias para el modelo:
 
 ```
 from azureml.core.environment import Environment
@@ -194,13 +193,12 @@ print(f"Service URL: {service.scoring_uri}")
 ```
 
 > [!NOTE]
-> Recuerda que puede tardar varios minutos; esperamos el despliegue.
+> Recuerda que puede tardar varios minutos; espera el despliegue.
 
-9. En la siguiente celda, agrega el siguiente código para la validación del modelo.
+9. En la siguiente celda, agrega el siguiente código para la validación del modelo:
 
 > [!IMPORTANT]
-> Esta prueba fallará, pero podremos enviar los logs a los servicios de monitoreo correspondientes. Recuerda cambiar el valor de **TU_URL** en la línea **5** del código de prueba por la URL de la celda anterior.
-
+> Esta prueba fallará, pero puedes enviar los logs a los servicios de monitoreo correspondientes. Recuerda cambiar el valor de **TU_URL** en la línea **5** del código de prueba por la URL de la celda anterior.
 
 ```
 import requests
@@ -247,15 +245,15 @@ else:
     print(f"Mensaje de error: {response.text}")
 ```
 
-Has entrenado un modelo de regresión, lo has registrado en tu Workspace y has configurado el entorno. Luego, preparaste el script de puntuación para la inferencia y desplegaste el modelo como un servicio web. Este servicio proporciona un endpoint accesible para realizar predicciones sobre valores de viviendas en producción.
+Has entrenado un modelo de regresión, lo has registrado en tu Workspace y configurado el entorno. Luego, preparaste el script de puntuación para la inferencia y desplegaste el modelo como un servicio web. Este servicio proporciona un endpoint accesible para realizar predicciones sobre valores de viviendas en producción.
 
 > **¡TAREA FINALIZADA!**
 
-### Tarea 3. Configuración de Métricas de Monitoreo
+### Tarea 3. Configuración de Métricas de Monitoreo.
 
-Dentro de esta tarea, explorarás la implementación de la herramienta Application Insights y la creación de un workbook de monitoreo con métricas de rendimiento.
+Dentro de esta tarea, explora la implementación de la herramienta Application Insights y la creación de un workbook de monitoreo con métricas de rendimiento.
 
-1. Ajusta el código de implementación del endpoint, que debe ser tu última celda. Agrega el siguiente código; puedes apoyarte en la imagen.
+1. Ajusta el código de implementación del endpoint, el cual debe ser tu última celda. Agrega el siguiente código; puedes apoyarte en la imagen.
 
 ```
 enable_app_insights=True
@@ -274,9 +272,9 @@ enable_app_insights=True
 > [!IMPORTANT]
 > Adicionalmente, puedes copiar la **URL** de la celda de implementación del endpoint y pegarla en una pestaña de tu navegador. **Ya sea la URL o el código de prueba, ejecútalo varias veces para generar los logs correspondientes.**
 
-3. Ahora, con el nuevo endpoint desplegado, obtendrás la **URL**. Selecciona tu endpoint. `Recuerda ir al menú lateral izquierdo y seleccionar Endpoints.`
+3. Con el nuevo endpoint desplegado, obtendrás la **URL**. Selecciona tu endpoint. `Recuerda ir al menú lateral izquierdo y seleccionar *Endpoints*.`
 
-4. Dentro de las propiedades, busca la **URL** hasta el final de la pantalla y da **Clic**.
+4. Dentro de las propiedades, busca la **URL** hasta el final de la pantalla y da **clic**.
 
 ![mlnot4](../images/imgl5/img9.png)
 
@@ -288,68 +286,68 @@ enable_app_insights=True
 
 7. Esta es una lista de opciones para investigar; todas las encontrarás en el menú lateral izquierdo.
 
-8. **Application map:** Gráfico telemétrico de las llamadas a tu endpoint.
+- **Application map:** Gráfico telemétrico de las llamadas a tu endpoint.
 
 ![mlnot4](../images/imgl5/img11.png)
 
-9. **Transaction search:** Investigación sobre el detalle de las llamadas al endpoint; da clic en **See all data in the last 24 hours**.
+- **Transaction search:** Investigación sobre el detalle de las llamadas al endpoint; da clic en **See all data in the last 24 hours**.
 
 ![mlnot4](../images/imgl5/img12.png)
 
-10. **Failures:** Observarás la cantidad de errores que puede tener el endpoint.
+- **Failures:** Observarás la cantidad de errores que puede tener el endpoint.
 
 ![mlnot4](../images/imgl5/img13.png)
 
-11. **Performance:** Promedio de tiempos de respuesta de las llamadas y actividad sobre el período de tiempo.
+- **Performance:** Promedio de tiempos de respuesta de las llamadas y actividad sobre el período de tiempo.
 
 ![mlnot4](../images/imgl5/img14.png)
 
-12. Esas son algunas de las más populares. **Tómate tu tiempo e investiga otras propiedades antes de continuar.**
+8. Esas son algunas de las más populares. **Tómate tu tiempo e investiga otras propiedades antes de continuar.**
 
-13. Cuando hayas terminado, pasaremos a la sección de monitoreo. Esto puede ser dentro del servicio llamado **Azure Monitor**, pero dentro de **App Insights** también hay un apartado.
+9. Cuando hayas finalizado, pasa a la sección de monitoreo. Esto puede ser dentro del servicio llamado **Azure Monitor**, pero dentro de **App Insights** también hay un apartado.
 
-14. Da clic en la opción **Metrics** de la sección **Monitoring**.
+10. Da clic en la opción **`Metrics`** de la sección **Monitoring**.
 
 ![mlnot4](../images/imgl5/img15.png)
 
-15. Da clic en la opción **Scope**.
+11. Da clic en la opción **`Scope`**.
 
 ![mlnot4](../images/imgl5/img16.png)
 
-16. En el menú lateral derecho, desmarca la opción actual y selecciona la casilla de tu workspace. Luego, haz clic en **Apply**.
+12. En el menú lateral derecho, desmarca la opción actual y selecciona la casilla de tu workspace. Luego, haz clic en **`Apply`**.
 
 ![mlnot4](../images/imgl5/img17.png)
 
-17. Ahora, en la opción de **Metric**, selecciona del menú desplegable **Model Deploy Started**.
+13. En la opción de **Metric**, selecciona del menú desplegable **Model Deploy Started**.
 
 ![mlnot4](../images/imgl5/img18.png)
 
-18. Agrega otra gráfica dando clic en la opción **New chart**.
+14. Agrega otra gráfica dando clic en la opción **`New chart`**.
 
 ![mlnot4](../images/imgl5/img19.png)
 
-19. Repite el paso anterior para cambiar la métrica de esta nueva gráfica. Selecciona la opción **Model Register Succeeded**.
+15. Repite el paso anterior para cambiar la métrica de esta nueva gráfica. Selecciona la opción **`Model Register Succeeded`**.
 
 > [!NOTE]
 > Intenta seguir agregando más gráficas con métricas que te den resultados.
 
-20. Una vez que tengas tus gráficas, vamos a guardarlas. Da clic en la opción superior **Share**.
+16. Una vez que tengas tus gráficas, guárdalas. Da clic en la opción superior **`Share`**.
 
 ![mlnot4](../images/imgl5/img20.png)
 
-21. Del menú desplegable, selecciona **Send to Workbook**.
+17. Del menú desplegable, selecciona **`Send to Workbook`**.
 
-22. Selecciona las últimas 4 casillas y da clic en **Send to Workbook**.
+18. Selecciona las últimas cuatro casillas y da clic en **`Send to Workbook`**.
 
 ![mlnot4](../images/imgl5/img21.png)
 
-23. En la nueva ventana, da clic en el ícono de guardado.
+19. En la nueva ventana, da clic en el ícono de guardado.
 
 ![mlnot4](../images/imgl5/img22.png)
 
-24. En la ventana lateral derecha, verifica tu suscripción asignada y escribe el siguiente nombre para el workbook: **`PerformanceModelWorkbook`**.
+20. En la ventana lateral derecha, verifica tu suscripción asignada y escribe el siguiente nombre para el workbook: **`PerformanceModelWorkbook`**.
 
-25. Haz clic en **Apply**.
+21. Haz clic en **Apply**.
 
 Has logrado entender las propiedades del servicio Application Insights y la definición de las métricas para el dashboard.
 
@@ -363,27 +361,27 @@ Para realizar consultas en Application Insights, puedes utilizar el Kusto Query 
 
 2. Selecciona el recurso creado.
 
-3. En el menú lateral izquierdo, da clic en **Logs** dentro de la sección **Monitoring**.
+3. En el menú lateral izquierdo, da clic en **`Logs`** dentro de la sección **Monitoring**.
 
 4. Puedes cerrar la ventana emergente en la cruz superior derecha.
 
-5. En el panel de propiedades, selecciona la opción **Queries**.
+5. En el panel de propiedades, selecciona la opción **`Queries`**.
 
 ![mlnot4](../images/imgl5/img23.png)
 
-6. En la parte inferior, habilita consultas, expande la carpeta **Performance** y da doble clic en **Operations performance**.
+6. En la parte inferior, habilita consultas, expande la carpeta **Performance** y da doble clic en **`Operations performance`**.
 
 ![mlnot4](../images/imgl5/img24.png)
 
-7. Automáticamente agregará la consulta y la ejecutará. En la parte inferior del código de la consulta verás el resultado.
+7. Automáticamente agregará la consulta y la ejecutará. En la parte inferior del código de la consulta podrás observar el resultado.
 
 ![mlnot4](../images/imgl5/img25.png)
 
-8. También puedes dar clic en la opción **Chart** para ver el resultado en gráfica.
+8. También puedes dar clic en la opción **`Chart`** para ver el resultado en gráfica.
 
 ![mlnot4](../images/imgl5/img26.png)
 
-9. Repite los pasos **6, 7, 8** para observar la consulta **Response time trend**.
+9. Repite los pasos **6, 7 y 8** para observar la consulta **Response time trend**.
 
 Con KQL y Application Insights, puedes realizar un análisis profundo de tus métricas personalizadas y obtener información valiosa sobre el comportamiento de tu aplicación en producción.
 
