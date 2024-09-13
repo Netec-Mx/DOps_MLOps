@@ -393,3 +393,7 @@ El resultado final será representado con la última consulta realizada.
 ![imagen resultado](../images/imgl5/img27.png)
 
 > **¡LABORATORIO FINALIZADO!**
+
+[Inicio](../README.md)<br>
+[Laboratorio 3.1. Despliegue de Servicio de Cómputo.](../Capítulo3/LAB_3.1.md)<br>
+[Laboratorio 4. Creación de Reportes y Visualización de Datos en Power BI.](../Capítulo4/LAB_4.md)<br>
