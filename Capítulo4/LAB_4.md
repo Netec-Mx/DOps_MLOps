@@ -478,3 +478,5 @@ El resultado esperado del laboratorio finalmente es ver las gráficas con la inf
 
 ![imagen resultado](../images/imgl6/img25.png)
 
+[Inicio](../README.md)<br>
+[Laboratorio 3.2. Despliegue, Monitoreo y Evaluación de Modelos.](../Capítulo3/LAB_3.2.md)<br>
