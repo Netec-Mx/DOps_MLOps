@@ -582,3 +582,6 @@ El resultado esperado es que no haya habido errores en ninguna de las tareas y p
 
 ![mlnotebookmodel9](../images/imgl2/img24.png)
 
+[Inicio](../README.md)<br>
+[Laboratorio 1.1. Configuración del Entorno de Desarrollo en Azure.](../Capítulo1/LAB_1.1.md)<br>
+[Laboratorio 2. Implementación de CI/CD para Machine Learning.](../Capítulo2/LAB_2.md)<br>
