@@ -1,73 +1,73 @@
-# Laboratorio 2. Implementación de CI/CD para Machine Learning 
+# Laboratorio 2. Implementación de CI/CD para Machine Learning.
 
 ## Objetivo de la práctica:
 Al finalizar la práctica, serás capaz de:
-- Configurar un pipeline de CI/CD en Azure DevOps para un proyecto de Machine Learning
+- Configurar un pipeline de CI/CD en Azure DevOps para un proyecto de Machine Learning.
 
-## Objetivo Visual
+## Objetivo Visual:
 
 ![diagrama1](../images/imgl3/img0.png)
 
 ## Duración aproximada:
 - 60 minutos.
 
-## **Prerequisitos:**
-- Cuenta de Azure
-- Cuenta de GitHub
-- Proyecto de Machine Learning existente en GitHub (usaremos un dataset de predicción de precios de casas)
-- Familiaridad básica con Azure DevOps
+## **Prerrequisitos:**
+- Cuenta de Azure.
+- Cuenta de GitHub.
+- Proyecto de Machine Learning existente en GitHub (usaremos un dataset de predicción de precios de casas).
+- Familiaridad básica con Azure DevOps.
 
-## Instrucciones 
+## Instrucciones:
 
 ### Tarea 1. Configuración del Proyecto en Azure DevOps.
 
-1.  Inicia sesión en **[Azure DevOps](https://dev.azure.com/)**
+1.  Inicia sesión en **[Azure DevOps](https://dev.azure.com/)**.
 
-2.  Clic en el boton **Start free**.
+2.  Clic en el botón **`Start free`**.
 
 ![azuredevops](../images/imgl3/img1.png)
 
-3. Autenticate con la cuenta de **Azure/Microsoft**.
+3. Autentícate con la cuenta de **Azure/Microsoft**.
 
 > [!NOTE]
-> Si es la primera vez que usas tu cuenta continua con los pasos de autenticacion y creacion de la organizacion de **Azure DevOps**
+> Si es la primera vez que usas tu cuenta, continúa con los pasos de autenticación y creación de la organización de **Azure DevOps**.
 
-4.  Una vez autenticado crea el proyecto de la organizacion de Azure DevOps con el siguiente nombre: **```mlopsproject```**.
+4.  Una vez autenticado, crea el proyecto de la organización de Azure DevOps con el siguiente nombre: **```mlopsproject```**.
 
-5.  Clic en el boton **Create project**.
+5.  Da clic en el botón **`Create project`**.
 
 ![azdevopsproject](../images/imgl3/img2.png)
 
 > [!NOTE]
-> En caso de que ya tengas proyectos existentes, puedes dar clic en el boton de la esquina superior derecha llamado **New Project**.
+> En caso de que ya tengas proyectos existentes, puedes dar clic en el botón de la esquina superior derecha llamado **`New Project`**.
 
 6.  Abre otra pestaña en tu navegador e inicia sesión en **[GitHub](https://github.com/)**.
 
 > [!NOTE]
-> Puedes usar una cuenta ya existente o puedes crear una.
+> Puedes usar una cuenta ya existente o crear una.
 
-7.  Dentro de tu cuenta de **GitHub** crea un repositorio nuevo.
+7.  Dentro de tu cuenta de **GitHub** crea un nuevo repositorio.
 
 ![githubaccount](../images/imgl3/img3.png)
 
-8.  En la pantalla **`Create a new repository`** configura lo siguinte:
+8.  En la pantalla **`Create a new repository`**, configura lo siguiente:
 
 | Parámetro       | Valores |
 |-----------------|---------|
-| Repository name    | **```mlopsrepo```** Si esta ocupado el nombre puedes agregar letras o numeros.|
-| Private  | **Seleccionado** |
-| Add a README file  | **Seleccionado** |
+| Repository name    | **```mlopsrepo```** Si está ocupado el nombre, puedes agregar letras o números.|
+| Private  | **Seleccionado**. |
+| Add a README file  | **Seleccionado**. |
 
 ![githubrepo](../images/imgl3/img4.png)
 
-9.  Clic en el boton **Create repository**. 
+9.  Clic en el botón **`Create repository`**. 
 
-10. Da clic en el boton **Add file** y despues en **Create new file**.
+10. Da clic en el botón **`Add file`** y después en **`Create new file`**.
 
 
 ![githubfile](../images/imgl3/img5.png)
 
-11. Agrega el siguiente codigo al archivo.
+11. Agrega el siguiente código al archivo:
 
 ```
 scikit-learn==1.3.0
@@ -78,15 +78,15 @@ pytest==7.4.0
 ```
 
 > [!IMPORTANT]
-> Este archivo realizara la instalacion de las dependencias que necesitara el programa de entrenamiento del modelo para generarlo.
+> Este archivo realizará la instalación de las dependencias que necesita el programa de entrenamiento del modelo para generarlo.
 
-12. Escribe el siguiente nombre del archivo **```requirements.txt```**.
+12. Escribe el siguiente nombre del archivo: **```requirements.txt```**.
 
-13. Da clic en el boton lateral derecho color verde llamado **Commit changes**.
+13. Da clic en el botón lateral derecho color verde llamado **`Commit changes`**.
 
-14. Nuevamente clic en **Commit changes** de la ventana emergente.
+14. Nuevamente, haz clic en **`Commit changes`** de la ventana emergente.
 
-15. Ahora repite los pasos anteriores ***10 al 14*** pero agrega el siguiente codigo en el archivo.
+15. Ahora repite los pasos anteriores, del ***10 al 14***, pero agrega el siguiente código en el archivo:
 
 ```
 import pandas as pd
@@ -181,12 +181,12 @@ if __name__ == "__main__":
         print(f"Fallo en el proceso de entrenamiento: {e}")
 ```
 
-16. Escribe el siguiente nombre para el archivo **```train.py```**.
+16. Escribe el siguiente nombre para el archivo: **```train.py```**.
 
 > [!IMPORTANT]
-> El archivo **`train.py`** carga el dataset de California Housing (demostrativo), valida los datos para asegurarse de que no contengan errores, divide los datos en conjuntos de entrenamiento y prueba, entrena un modelo de regresión lineal, evalúa su rendimiento mediante el cálculo del MSE y el R², y finalmente guarda el modelo entrenado en un archivo model.pkl
+> El archivo **`train.py`** carga el dataset de California Housing (demostrativo), valida los datos para asegurarse de que no contengan errores, divide los datos en conjuntos de entrenamiento y prueba, entrena un modelo de regresión lineal, evalúa su rendimiento mediante el cálculo del MSE y el R², y finalmente guarda el modelo entrenado en un archivo model.pkl.
 
-17. Agrega un archivo mas al repositorio y pega el siguiente codigo:
+17. Agrega un archivo más al repositorio y pega el siguiente código:
 
 ```
 import pytest
@@ -241,7 +241,7 @@ def test_model_output_range():
     assert 0.0 <= prediction[0] <= 10.0, f"La predicción está fuera del rango esperado: {prediction[0]}"
 ```
 
-18. Escribe el siguiente nombre para el archivo **```tests/test_model.py```**
+18. Escribe el siguiente nombre para el archivo: **```tests/test_model.py```**.
 
 ![githubfile2](../images/imgl3/img7.png)
 
@@ -250,71 +250,71 @@ def test_model_output_range():
 
 19. Guarda el archivo.
 
-20. La estructura raiz de los archivos debe de ser como la de la imagen.
+20. La estructura raíz de los archivos debe de ser como en la imagen siguiente:
 
 ![githubfile3](../images/imgl3/img8.png)
 
-21. Ahora da clie en el boton lateral izquierdo llamado **`<> Code`**.
+21. Posteriormente, da clic en el botón lateral izquierdo llamado **`<> Code`**.
 
 ![githubfile3](../images/imgl3/img9.png)
 
-22. Clic en el boton verde **Code** para desplegar el menu, verifica que este seleccionado **`HTTPS`** y copi a la URL del repositorio, como lo muestra la imagen.
+22. Haz clic en el botón verde **`Code`** para desplegar el menú; verifica que esté seleccionado **`HTTPS`** y copia a la URL del repositorio, como lo muestra la imagen.
 
 ![githubfile3](../images/imgl3/img10.png)
 
 > [!NOTE]
-> Guarda la URL momentaneamente en tu Bloc de Notas.
+> Guarda la URL momentáneamente en tu Bloc de Notas.
 
-23. Regresa a la pagina de **[Azure DevOps](https://dev.azure.com/)**
+23. Regresa a la página de **[Azure DevOps](https://dev.azure.com/)**.
 
-24. Da clic en el nombre de tu proyecto y en el menu lateral izquierdo selecciona **`Repos`**.
+24. Da clic en el nombre de tu proyecto y, en el menú lateral izquierdo, selecciona **`Repos`**.
 
 ![azrepos](../images/imgl3/img11.png)
 
-25. Ahora clic en la opcion **Import a repository**
+25. Ahora, haz clic en la opción **`Import a repository`**.
 
 ![azrepos1](../images/imgl3/img12.png)
 
-26. Pega la URL que tienes en el Bloc de notas y da clic en **Import**.
+26. Pega la URL que tienes en el Bloc de notas y da clic en **`Import`**.
 
 ![azrepos2](../images/imgl3/img13.png)
 
 > [!NOTE]
-> Espera entre **10 a 20 segundos** automaticamente te redireccionara al repositorio importado.
+> Espera de **10 a 20 segundos**; automáticamente te redireccionará al repositorio importado.
 
-27. Asegurate de que esten todos los archivos.
+27. Asegúrate de que estén todos los archivos.
 
 ![azrepos3](../images/imgl3/img14.png)
 
 > **¡TAREA FINALIZADA!**
 
-### Tarea 2. Configuración del Pipeline de Integración Continua (CI)
+### Tarea 2. Configuración del Pipeline de Integración Continua (CI).
 
-1.  Dentro del proyecto **`mlopsproject`** selecciona del menu lateral izquiero **Pipelines**.
+1.  Dentro del proyecto **`mlopsproject`**, selecciona del menú lateral izquierdo **Pipelines**.
 
 ![azpipeline](../images/imgl3/img15.png)
 
-2.  Clic en el boton **Create Pipeline**.
+2.  Clic en el botón **`Create Pipeline`**.
 
 ![azpipeline2](../images/imgl3/img16.png)
 
-3.  En la opcion **`Where is your code?`** selecciona **GitHub**.
+3.  En la opción **`Where is your code?`**, selecciona **`GitHub`**.
 
 ![azpipeline2](../images/imgl3/img17.png)
 
-4.  Abrira una pagina para que des la autorizacion de integracion entre **GitHub** y **Azure Pipelines** clic en el boton **Authorize AzurePipelines**.
+4.  Esto abrirá una página para que brindes la autorización de integración entre **GitHub** y **Azure Pipelines**. Da clic en el botón **`Authorize AzurePipelines`**.
 
 ![azpipeline2](../images/imgl3/img18.png)
 
-5.  Una vez autorizado, selecciona el repositorio llamado **mlopsrepo** previamente creado.
+5.  Una vez autorizado, selecciona el repositorio llamado **mlopsrepo**, el cual fue previamente creado.
 
 ![azpipeline2](../images/imgl3/img19.png)
 
-6.  En la opcion **`Configure your pipeline`** selecciona **Starter pipeline.
+6.  En la opción **`Configure your pipeline`**, selecciona **`Starter pipeline`**.
 
 ![azpipeline3](../images/imgl3/img20.png)
 
-7.  Ahora borra todo el contenido del archivo YAML existente y pega el siguiente codigo.
+7.  Ahora borra todo el contenido del archivo YAML existente y pega el siguiente código:
 
 ```
 trigger:
@@ -351,13 +351,13 @@ steps:
 ```
 
 > [!NOTE]
-> El archivo **`azure-pipelines.yml`** ejecutara los archivos del repositorio en el orden adecuado para instalar las dependencias, entrenar el modelo ejemplo y realizar las preuebas de la carpeta tests.
+> El archivo **`azure-pipelines.yml`** ejecutará los archivos del repositorio en el orden adecuado para instalar las dependencias, entrenar el modelo ejemplo y realizar las preuebas de la carpeta tests.
 
-8.  Da clic en el boton lateral derecho **`Save and run`**.
+8.  Da clic en el botón lateral derecho **`Save and run`**.
 
-9.  En la ventana emergente acepta la configuración predeterminada y da clic en el boton **`Save and run`**.
+9.  En la ventana emergente acepta la configuración predeterminada y da clic en el botón **`Save and run`**.
 
-10. Si todo sale bien veras un **Job** en ejecución como lo muestra la imagen.
+10. Si todo sale bien, observarás un **Job** en ejecución como lo muestra la imagen.
 
 ![azpipeline4](../images/imgl3/img21.png)
 
@@ -374,23 +374,23 @@ steps:
 
 > **¡TAREA FINALIZADA!**
 
-### Tarea 3. Configuración del Pipeline de Despliegue Continuo (CD)
+### Tarea 3. Configuración del Pipeline de Despliegue Continuo (CD).
 
 1.  En **Azure DevOps**, navega a **Pipelines** > **Releases** en el menú lateral izquierdo.
 
 ![azpiperelease](../images/imgl3/img24.png)
 
-2.  Haz clic en **New Pipeline**.
+2.  Haz clic en **`New Pipeline`**.
 
-3.  Selecciona **Empty job** al final de lista de la ventana emergente lateral izquierda y da clic en **Apply**
+3.  Selecciona **Empty job** al final de lista de la ventana emergente lateral izquierda y da clic en **`Apply`**.
 
 ![azpiperelease1](../images/imgl3/img25.png)
 
-4.  En la ventana de nombre **Stage** da clic en la cruz para cerrarla.
+4.  En la ventana de nombre **Stage**, da clic en la cruz para cerrarla.
 
 ![azpiperelease2](../images/imgl3/img26.png)
 
-5.  Ahora en la parte superior cambia el nombre del pipeline escribe: **```Deploy Model```**
+5.  Ahora, en la parte superior, cambia el nombre del pipeline escribe: **```Deploy Model```**.
 
 ![azpiperelease2](../images/imgl3/img27.png)
 
@@ -398,15 +398,15 @@ steps:
 
 ![azpiperelease3](../images/imgl3/img28.png)
 
-7.  Selecciona el pipeline de CI configurado previamente como fuente, Puedes apoyarte de la imagen.
+7.  Selecciona el pipeline de CI configurado previamente como fuente; puedes apoyarte de la imagen.
 
 ![azpiperelease3](../images/imgl3/img29.png)
 
-8.  Da clic en el nombre de la etapa y dentro de las propiedades haz clic en el boton **Delete**.
+8.  Da clic en el nombre de la etapa y dentro de las propiedades haz clic en el botón **`Delete`**.
 
 ![azpiperelease5](../images/imgl3/img30.png)
 
-9.  Haz clic en el botón **Add** para agregar una nueva etapa de tipo **Azure App Service deployment**.
+9.  Haz clic en el botón **`Add`** para agregar una nueva etapa de tipo **Azure App Service deployment**.
 
 ![azpiperelease6](../images/imgl3/img31.png)
 
@@ -414,25 +414,25 @@ steps:
 
 ![azpiperelease7](../images/imgl3/img32.png)
 
-11. Haz clic en las propiedades de la etapa para terminar de configurar el servicos de **Azure Apps**
+11. Haz clic en las propiedades de la etapa para terminar de configurar el servicio de **Azure Apps**
 
 ![azpiperelease8](../images/imgl3/img33.png)
 
-12. Da clic en el menu desplegable de la opción **Azure Subscription** y selecciona la suscripción disponible, haz clic en el botón **Authorize**.
+12. Da clic en el menú desplegable de la opción **Azure Subscription** y selecciona la suscripción disponible, haz clic en el botón **Authorize**.
 
 > [!NOTE]
-> Recuerda que la suscripción puede ser diferente y continua con el proceso si te pide autenticacion para autorizarla.
+> Recuerda que la suscripción puede ser diferente. Continúa con el proceso si te pide autenticación para autorizarla.
 
 ![azpiperelease8](../images/imgl3/img34.png)
 
 > [!IMPORTANT]
-> **NO** cierres la pagina.
+> **NO** cierres la página.
 
-13. Abre otra pestaña en tu navegador y da clic en la pagina del portal de Azure **[AQUÍ](https://portal.azure.com/)**.
+13. Abre otra pestaña en tu navegador y da clic en la página del portal de Azure **[AQUÍ](https://portal.azure.com/)**.
 
-14. En el buscador superior de la pagina, escribimos: **`App Services`**
+14. En el buscador superior de la página, escribe: **`App Services`**.
 
-15. En la parte superior izquierda da clic en **Create** y en el menu desplegable selecciona **Web App**.
+15. En la parte superior izquierda da clic en **`Create`** y en el menú desplegable selecciona **`Web App`**.
 
 16. Define los siguientes parametros el resto se quedara por defecto:
 
@@ -446,12 +446,12 @@ steps:
 | Region          | **East US** |
 | Pricing plan          | **Basic B1** `Exploring pricing plans` |
 
-17. En la parte inferior da clic en el boton **`Review + create`** y nuevamente en **`Create`**
+17. En la parte inferior da clic en el botón **`Review + create`** y nuevamente en **`Create`**.
 
 > [!NOTE]
-> Espera el tiempo de creacion del recurso, podria tardar **30 segundos**
+> Espera el tiempo de creación del recurso, esto podría tardar **30 segundos** aproximadamente.
 
-18. Una vez creado, regresa a la pestaña donde estabas configurando tu pipeline y configura lo siguiente.
+18. Una vez creado, regresa a la pestaña donde estabas configurando tu pipeline y configura lo siguiente:
 
 | Parámetro       | Valores |
 |-----------------|---------|
@@ -462,18 +462,18 @@ steps:
 
 ![azpiperelease9](../images/imgl3/img35.png)
 
-19. En la parte superior derecha haz clic en el botón **Save** y **OK** en la ventana emergente.
+19. En la parte superior derecha haz clic en el botón **`Save`** y **`OK`** en la ventana emergente.
 
-20. Finalmente haz clic en el botón **Create release** en la venana emergente ejecuta **Create** y monitorea tus resultados.
+20. Finalmente, haz clic en el botón **`Create release`**, en la ventana emergente ejecuta **`Create`** y monitorea tus resultados.
 
-21. Verifica tus resultados el promedio de tiempo de implementación es **2.30 minutos**.
+21. Verifica tus resultados; el promedio de tiempo de implementación es **2.30 minutos**.
 
 ![azpiperelease9](../images/imgl3/img36.png)
 
 > **¡TAREA FINALIZADA!**
 
-### Resultado esperado
-El laboratorio mostro los pasos para configurar pipelines de CI/CD en Azure DevOps, integrados con GitHub, específicamente para un proyecto de predicción de precios de casas como ejemplo.
+### Resultado esperado:
+El laboratorio mostró los pasos para configurar pipelines de CI/CD en Azure DevOps, integrados con GitHub, específicamente para un proyecto de predicción de precios de casas como ejemplo.
 
 ![imagen resultado](../images/imgl3/img37.png)
 
