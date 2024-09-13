@@ -183,4 +183,4 @@ El resultado debe ser la ejecución de todas las celdas sin errores.
 
 [Inicio](../README.md)<br>
 [Laboratorio 0. Preparación del ambiente de Azure DevOps.](../Capítulo1/LAB_Validation.md)<br>
-[Laboratorio 1.2. Ciclo de Vida de MLOps..](../Capítulo1/LAB_1.1.md)<br>
+[Laboratorio 1.2. Ciclo de Vida de MLOps..](../Capítulo1/LAB_1.2.md)<br>
