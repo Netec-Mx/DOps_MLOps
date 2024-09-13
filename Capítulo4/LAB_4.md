@@ -1,4 +1,4 @@
-# Laboratorio 4. Creación de Reportes y Visualización de Datos en Power BI 
+# Laboratorio 4. Creación de Reportes y Visualización de Datos en Power BI.
 
 ## Objetivo de la práctica:
 Al finalizar la práctica, serás capaz de:
@@ -6,7 +6,7 @@ Al finalizar la práctica, serás capaz de:
 - Integrar y visualizar datos de Azure Application Insights relacionados con el uso del modelo.
 - Configurar un dashboard en Power BI para monitorizar el estado y las métricas del modelo.
 
-## Objetivo Visual 
+## Objetivo Visual:
 
 ![diagrama1](../images/imgl6/img0.png)
 
@@ -20,37 +20,37 @@ Al finalizar la práctica, serás capaz de:
 - Datos para entrenar un modelo de Machine Learning.
 - Conocimientos básicos de Azure Machine Learning y Power BI.
 
-## Instrucciones 
+## Instrucciones:
 
 ### Tarea 1. Entrenamiento y Despliegue de un Modelo en Azure Machine Learning.
 
-En esta sección, vamos a entrenar un modelo de Machine Learning para predecir si un pasajero del Titanic sobrevivió o no, y luego desplegaremos este modelo en Azure Machine Learning.
+En esta sección, vas a entrenar un modelo de Machine Learning para predecir si un pasajero del Titanic sobrevivió o no y,  finalmente, despliega este modelo en Azure Machine Learning.
 
 1. Dirígete al Portal de Azure e inicia sesión con tu cuenta en [Azure Portal](https://portal.azure.com/).
 
-2. En la barra de búsqueda del portal, escribe **`Machine Learning`** y selecciona **`Machine Learning`**.
+2. En la barra de búsqueda del portal, escribe **`Machine Learning`** y selecciónalo.
 
-3. Usa el **Workspace** de Azure Machine Learning **existente** creado previamente.
+3. Usa el **Workspace** de Azure Machine Learning **existente**, el cual fue creado previamente.
 
-4. Haz clic en **Launch Studio**.
+4. Haz clic en **`Launch Studio`**.
 
-5. Dentro de tu workspace, selecciona **Notebooks** del menú lateral izquierdo.
+5. Dentro de tu workspace, selecciona **`Notebooks`** del menú lateral izquierdo.
 
 ![mlnote](../images/imgl5/img1.png)
 
-6. En tu carpeta **raíz**, haz clic en los 3 puntos para expandir el menú y selecciona **Create new folder**.
+6. En tu carpeta **raíz**, haz clic en los tres puntos para expandir el menú y selecciona **`Create new folder`**.
 
 ![mlnote1](../images/imgl5/img2.png)
 
-7. Escribe el siguiente nombre **`titanic-model`** y haz clic en el botón **Create**.
+7. Escribe el siguiente nombre: **`titanic-model`**, y haz clic en el botón **`Create`**.
 
 ![mlnot2](../images/imgl6/img1.png)
 
-8. Ahora repite los pasos, pero selecciona la carpeta creada y crea un archivo llamado **`titanic`** de tipo **Notebook**.
+8. Repite los pasos, pero selecciona la carpeta creada y crea un archivo llamado **`titanic`** de tipo **Notebook**.
 
 ![mlnot3](../images/imgl6/img2.png)
 
-9. Haz clic en el botón **Create**.
+9. Haz clic en el botón **`Create`**.
 
 10. En el cuaderno, ejecuta la siguiente celda para instalar las librerías requeridas y conectar al Workspace:
 
@@ -90,7 +90,7 @@ df.head()
 
 ![mlnot3](../images/imgl6/img3.png)
 
-12. Ahora vamos a cargar el dataset **Titanic** desde un archivo CSV y lo registraremos en el workspace de Azure Machine Learning para que esté disponible en futuras ejecuciones si es necesario.
+12. Carga el dataset **Titanic** desde un archivo CSV y regístralo en el workspace de Azure Machine Learning para que esté disponible en futuras ejecuciones si es necesario.
 
 ```
 from azureml.core import Dataset
@@ -134,7 +134,7 @@ print(f"Tamaño del conjunto de prueba: {X_test.shape}")
 
 ![mlnot3](../images/imgl6/img5.png)
 
-14.  Entrenaras el modelo de clasificación Random Forest utilizando las características seleccionadas. Este modelo aprenderá a predecir si un pasajero sobrevivió:
+14.  Entrena el modelo de clasificación *Random Forest* utilizando las características seleccionadas. Este modelo aprenderá a predecir si un pasajero sobrevivió:
 
 ```
 # Entrenar un modelo Random Forest
@@ -162,7 +162,7 @@ print(report)
 - Tiene un buen desempeño en identificar correctamente a los sobrevivientes (recall alto en clase 1), pero tiene dificultades para identificar correctamente a los que no sobrevivieron (recall bajo en clase 0).
 - La precisión general (0.68) es razonable, pero hay margen para mejorar, especialmente en la clasificación de no sobrevivientes.
 
-15. Después de entrenar el modelo, lo registraras en el Workspace de Azure Machine Learning para que esté disponible en el despliegue.
+15. Después de entrenar el modelo, regístralo en el Workspace de Azure Machine Learning para que esté disponible en el despliegue.
 
 ```
 from azureml.core.model import Model
@@ -181,7 +181,7 @@ print(f"Modelo registrado: {model.name} - {model.version}")
 
 ![mlnot3](../images/imgl6/img7.png)
 
-16. Ahora crea un nuevo entorno personalizado para el modelo:
+16. Crea un nuevo entorno personalizado para el modelo:
 
 ```
 from azureml.core import Environment
@@ -206,9 +206,9 @@ env.register(workspace=ws)
 ```
 
 > [!NOTE]
-> El resultado de la creación del entorno sera representado en **JSON**, mientras no marque algun error puedes avanzar con los demas pasos.
+> El resultado de la creación del entorno sera representado en **JSON**, mientras no marque algún error puedes avanzar con los demás pasos.
 
-17. Desplegaras el modelo como un servicio web utilizando Azure Container Instances (ACI). Esto permitirá realizar predicciones a través de una API:
+17. Despliega el modelo como un servicio web utilizando Azure Container Instances (ACI). Esto permitirá realizar predicciones a través de una API.
 
 ```
 from azureml.core.model import InferenceConfig
@@ -262,7 +262,7 @@ service.wait_for_deployment(show_output=True)
 print(f"Service URL: {service.scoring_uri}")
 ```
 
-18. Validaras que el servicio este funcionando correctamente enviando una solicitud de predicción con datos de ejemplo. el resultado sera que **No Sobrevivira**
+18. Valida que el servicio esté funcionando correctamente enviando una solicitud de predicción con datos de ejemplo. El resultado sera que: **No Sobrevivirá**.
 
 ```
 import requests
@@ -286,7 +286,7 @@ print(f"Respuesta del servicio: {response.json()}")
 
 ![mlnot3](../images/imgl6/img8.png)
 
-19. Ahora este ejemplo modificado y con un perfil de pasajero que tiene más probabilidades de sobrevivir:
+19. En este ejemplo modificado y con un perfil de pasajero que tiene más probabilidades de sobrevivir:
 
 ```
 import requests
@@ -316,9 +316,9 @@ Entrenaste un modelo de clasificación para predecir la supervivencia de pasajer
 
 ### Tarea 2. Integración de Azure Monitor.
 
-Para poder monitorizar el modelo desplegado en Azure primero debemos activar los servicios adecuados y enviarlos al sistema de **Power BI**.
+Para monitorizar el modelo desplegado en Azure, primero debes activar los servicios adecuados y enviarlos al sistema de **Power BI**.
 
-1.  Primero debemos activar **Azure Application Insights** para capturar los logs y las métricas del servicio web.
+1.  Para iniciar, debes activar **Azure Application Insights** para capturar los logs y las métricas del servicio web.
 
 ```
 from azureml.core.webservice import Webservice
@@ -334,7 +334,7 @@ print("Application Insights habilitado para el servicio web.")
 
 ![mlnot3](../images/imgl6/img10.png)
 
-2.  Generaras solicitudes de predicción para que el servicio web procese datos. Esto permitirá que se recopilen datos en **Azure Application Insights**, que luego usaras en **Power BI**.
+2.  Genera solicitudes de predicción para que el servicio web procese datos. Esto permitirá que se recopilen datos en **Azure Application Insights**, que luego se usarán en **Power BI**.
 
 ```
 import requests
@@ -358,21 +358,21 @@ for data in test_data:
 
 ![mlnot3](../images/imgl6/img11.png)
 
-3.  Ahora, con el endpoint desplegado, obtendrás la **URL** de **Application Insights**. Selecciona tu endpoint. `Recuerda ir al menú lateral izquierdo y seleccionar Endpoints.`
+3.  Con el endpoint desplegado, obtendrás la **URL** de **Application Insights**. Selecciona tu endpoint; `recuerda ir al menú lateral izquierdo y seleccionar Endpoints.`
 
-4.  Dentro de las propiedades, busca la **URL** hasta el final de la pantalla y da **Clic**.
+4.  Dentro de las propiedades, busca la **URL** hasta el final de la pantalla y da **clic**.
 
 ![mlnot4](../images/imgl6/img12.png)
 
 5.  Se abrirá otra pestaña con el servicio **Application Insights**.
 
-6.  Ahora expande la propiedad del menu lateral izquierdo llamado **Monitoring** y selecciona **Logs**.
+6.  Expande la propiedad del menú lateral izquierdo llamado **Monitoring** y selecciona **`Logs`**.
 
 ![mlnot4](../images/imgl6/img13.png)
 
 7.  Puedes cerrar la ventana emergente en la cruz superior derecha.
 
-8.  Ahora, dentro del editor de la consulta, ejecuta el siguiente código para visualizar los resultados de la telemetría:
+8.  Dentro del editor de la consulta, ejecuta el siguiente código para visualizar los resultados de la telemetría:
 
 ```
 requests
@@ -382,25 +382,23 @@ requests
 ![mlnot4](../images/imgl6/img14.png)
 
 > [!IMPORTANT]
-> **Los siguientes pasos serán de lectura solamente, ya que si no tienes una cuenta empresarial para autenticarte en Azure y Power BI, no podrás autenticarte ni crear los reportes.**
+> **Los siguientes pasos serán de lectura solamente, ya que, si no tienes una cuenta empresarial para autenticarte en Azure y Power BI, no podrás autenticarte ni crear los reportes.**
 
 9.  Abre la aplicación **Power BI Desktop** en tu computadora o navegador web.
 
-10. En la pantalla de inicio de Power BI Desktop, ve a la pestaña **"Inicio"** en la cinta de opciones. Haz clic en **"Obtener datos" (Get Data).**
+10. En la pantalla de inicio de Power BI Desktop, ve a la pestaña **"Inicio"** en la cinta de opciones. Haz clic en **`Obtener datos` (Get Data).**
 
-11. En el panel de **"Obtener datos"**, selecciona **"Azure"** en la lista de categorías a la izquierda.
+11. En el panel de **"Obtener datos"**, selecciona **`Azure`** en la lista de categorías a la izquierda.
 
-12. Luego, selecciona **"Azure Application Insights"**.
+12. Luego, selecciona **`Azure Application Insights`**.
 
-13. Se te pedirá que introduzcas tus credenciales de Azure para autenticarte.
+13. Te pedirá que introduzcas tus credenciales de Azure para autenticarte.
 
-
-14. Selecciona tu **"Suscripción"** y **"Grupo de recursos"** donde se encuentra tu instancia de Application Insights.
+14. Selecciona tu **`Suscripción`** y **`Grupo de recursos`** donde se encuentra tu instancia de Application Insights.
 
 15. Selecciona la **"Instancia de Application Insights"** a la que deseas conectarte.
 
-16. Se abrirá un cuadro de diálogo para la autenticación. Introduce tus credenciales de Azure (si aún no has iniciado sesión).
-Autoriza Power BI para acceder a tus datos de Application Insights.
+16. Se abrirá un cuadro de diálogo para la autenticación. Introduce tus credenciales de Azure (si aún no has iniciado sesión). Autoriza a Power BI para acceder a tus datos de Application Insights.
 
 Este flujo de trabajo proporciona una manera efectiva de monitorear y evaluar modelos en producción, además de crear reportes visuales y fácilmente interpretables en Power BI.
 
@@ -408,9 +406,9 @@ Este flujo de trabajo proporciona una manera efectiva de monitorear y evaluar mo
 
 ### Tarea 3. Creación del Reporte en Power BI.
 
-En este paso, cargarás los datos de Azure Monitor y Azure Machine Learning desde Power BI Desktop para importar las métricas y datos relevantes.
+En este paso, carga los datos de Azure Monitor y Azure Machine Learning desde Power BI Desktop para importar las métricas y datos relevantes.
 
-1.  Si no puedes realizar una conexión directa al servicio de **Azure Application Insights**, realizaremos el ejemplo con carga de datos manual.
+1.  Si no puedes realizar una conexión directa al servicio de **Azure Application Insights**, realiza el ejemplo con carga de datos manual.
 
 2.  Ve a la interfaz de los logs que usaste en la tarea anterior y realiza la siguiente consulta:
 
@@ -419,29 +417,29 @@ requests
 | take 100
 ```
 
-3.  Ahora selecciona la propiedad **Export** de la barra de propiedades y selecciona **Export CSV (all columns)**
+3.  Selecciona la propiedad **`Export`** de la barra de propiedades y da clic en **`Export CSV` (All columns)**
 
 ![mlnot4](../images/imgl6/img15.png)
 
-4.  Muy bien, ahora abre **Power BI Desktop** o **Power BI Web** y autentícate.
+4.  ¡Muy bien! Ahora, abre **Power BI Desktop** o **Power BI Web** y autentícate.
 
-5.  En la pantalla de bienvenida, selecciona la opción **Obtener datos de otros orígenes**
+5.  En la pantalla de bienvenida, selecciona la opción **`Obtener datos de otros orígenes`**.
 
 ![mlnot4](../images/imgl6/img16.png)
 
-6.  En la ventana emergente, selecciona la opción **Texto o CSV** y busca los datos descargados en el paso anterior.
+6.  En la ventana emergente, selecciona la opción **`Texto o CSV`** y busca los datos descargados en el paso anterior.
 
 ![mlnot4](../images/imgl6/img17.png)
 
-7.  En la siguiente ventana emergente, da clic en el botón **Cargar**.
+7.  En la siguiente ventana emergente, da clic en el botón **`Cargar`**.
 
-8.  Agregarás 2 gráficas demostrativas para crear reportes.
+8.  Agrega dos gráficas demostrativas para crear reportes.
 
 9.  Selecciona la gráfica de **Gráfico de columnas apiladas** y se colocará en el canvas.
 
 ![mlnot4](../images/imgl6/img18.png)
 
-10. En las propiedades de los ejes, configura en **X = duration** y en el eje **Y = resultCode**. El resultado será el `recuento de código por duración.`
+10. En las propiedades de los ejes, configura en **X = duration** y en el eje **Y = resultCode**. El resultado será el `recuento de código por duración`.
 
 ![mlnot4](../images/imgl6/img19.png)
 
@@ -457,17 +455,17 @@ requests
 
 ![mlnot4](../images/imgl6/img22.png)
 
-14. Ya configuradas las gráficas demostrativas, puedes publicar tu reporte. Da clic en la sección **Publicar**.
+14. Una vez configuradas las gráficas demostrativas, puedes publicar tu reporte. Da clic en la sección **`Publicar`**.
 
 ![mlnot4](../images/imgl6/img23.png)
 
-15. En la ventana emergente, da clic en **Guardar** y después elige el lugar donde deseas guardar el archivo.
+15. En la ventana emergente, da clic en **`Guardar`** y después elige el lugar donde deseas guardar el archivo.
 
-16. Ya guardado, te saldrá una ventana emergente para publicarlo en el workspace de **Power BI**. Selecciónalo.
+16. Ya que está guardado, te saldrá una ventana emergente para publicarlo en el workspace de **Power BI**; selecciónalo.
 
 ![mlnot4](../images/imgl6/img24.png)
 
-17. Espera el proceso de publicación y clic en el botón **Entendido**.
+17. Espera el proceso de publicación y da clic en el botón **`Entendido`**.
 
 Estos pasos te permitirán crear un reporte en Power BI que muestre gráficas demostrativas sobre la información del modelo.
 
@@ -475,7 +473,7 @@ Este es un ejemplo sobre la creación de reportes de modelos de machine learning
 
 > **¡TAREA FINALIZADA!**
 
-### Resultado esperado
+### Resultado esperado:
 El resultado esperado del laboratorio finalmente es ver las gráficas con la información que se generó desde la implementación de tu modelo.
 
 ![imagen resultado](../images/imgl6/img25.png)
