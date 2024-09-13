@@ -593,3 +593,7 @@ El resultado final será verificar que ambas implementaciones den los resultados
 ![vsclocal3](../images/imgl4/img30.png)
 
 > **¡LABORATORIO FINALIZADO!**
+
+[Inicio](../README.md)<br>
+[Laboratorio 2. Implementación de CI/CD para Machine Learning.](../Capítulo2/LAB_2.md)<br>
+[Laboratorio 3.2. Despliegue, Monitoreo y Evaluación de Modelos.](../Capítulo3/LAB_3.2.md)<br>
