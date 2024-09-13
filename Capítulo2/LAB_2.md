@@ -480,5 +480,5 @@ El laboratorio mostró los pasos para configurar pipelines de CI/CD en Azure Dev
 > **¡LABORATORIO FINALIZADO!**
 
 [Inicio](../README.md)<br>
-[Laboratorio 1.2. Ciclo de Vida de MLOps..](../Capítulo1/LAB_1.1.md)<br>
+[Laboratorio 1.2. Ciclo de Vida de MLOps..](../Capítulo1/LAB_1.2.md)<br>
 [Laboratorio 3.1. Despliegue de Servicio de Cómputo.](../Capítulo3/LAB_3.1.md)<br>
