@@ -60,3 +60,6 @@ Al finalizar la práctica, serás capaz de:
 > Espera al menos **3 horas** antes de utilizar las capacidades de CI/CD para que los nuevos ajustes se reflejen en el backend. De lo contrario, seguirás viendo el mensaje **"No se ha adquirido ni concedido paralelismo alojado"**.
 
 > **¡LABORATORIO FINALIZADO!**
+> 
+>[Inicio](../README.md)<br>
+> [Laboratorio 1.1. Configuración del Entorno de Desarrollo en Azure.](../Capítulo1/LAB_1.1.md)<br>
