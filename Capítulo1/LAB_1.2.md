@@ -1,10 +1,10 @@
-# Laboratorio 1.2. Ciclo de Vida de MLOps 
+# Laboratorio 1.2. Ciclo de Vida de MLOps.
 
 ## Objetivo de la práctica:
 Al finalizar la práctica, serás capaz de:
 - Implementar un flujo de trabajo completo de MLOps utilizando Azure Machine Learning y Jupyter Notebooks.
 
-## Objetivo Visual 
+## Objetivo Visual:
 Fases del ciclo de vida de machine learning.
 
 ![diagrama1](../images/imgl2/img0.png)
@@ -12,14 +12,14 @@ Fases del ciclo de vida de machine learning.
 ## Duración aproximada:
 - 50 minutos.
 
-## **Prerequisitos:**
+## **Prerrequisitos:**
 - Tener una cuenta activa en Azure.
 - Conocimientos básicos en Python y Machine Learning.
 - Familiaridad con Jupyter Notebooks y Azure Portal.
 
-## Instrucciones 
+## Instrucciones:
 
-### **FASE 1: PLANIFICACIÓN DEL MODELO**
+### **FASE 1: PLANIFICACIÓN DEL MODELO.**
 
 - Objetivo: Predecir la especie de flores iris utilizando el dataset iris.
 
@@ -31,15 +31,15 @@ Fases del ciclo de vida de machine learning.
 
 ### Tarea 1. Creación de un contenedor en Azure Storage Account.
 
-1.  Primero, abre tu Portal de Azure **[AQUÍ](https://portal.azure.com/)**.
+1.  Para iniciar, abre tu Portal de Azure en este **[enlace](https://portal.azure.com/)**.
 
-2.  Busca el servicio de **`Azure Storage Account`** en la parte superior central del portal y haz clic en **Storage accounts**.
+2.  Busca el servicio de **`Azure Storage Account`** en la parte superior central del portal y haz clic en **`Storage accounts`**.
 
 ![storaccount](../images/imgl2/img1.png)
 
-3.  En la parte superior izquierda, haz clic en el botón **Create**.
+3.  En la parte superior izquierda, haz clic en el botón **`Create`**.
 
-4.  En la página de creación del Storage Account, define los siguientes valores. Puedes guiarte de la imagen.
+4.  En la página de creación del Storage Account, define los siguientes valores; puedes guiarte de la imagen:
 
 | Parámetro       | Valores |
 |-----------------|---------|
@@ -53,15 +53,15 @@ Fases del ciclo de vida de machine learning.
 > [!IMPORTANT]
 > **El resto de los valores se quedarán por defecto.**
 
-5.  Haz clic en el botón **Review + create**.
+5.  Haz clic en el botón **`Review + create`**.
 
-6.  Ahora, haz clic en el botón **Create**.
+6.  Ahora, da clic en el botón **`Create`**.
 
 > [!NOTE]
 > El proceso de creación puede durar un par de minutos. Espera a que se complete la creación del servicio.
-> Mientras tanto, puedes ver una **[Introducción a Azure Storage](https://learn.microsoft.com/en-us/azure/storage/common/storage-introduction?toc=%2Fazure%2Fstorage%2Fblobs%2Ftoc.json)**.
+> Mientras tanto, puedes ver la **[Introducción a Azure Storage](https://learn.microsoft.com/en-us/azure/storage/common/storage-introduction?toc=%2Fazure%2Fstorage%2Fblobs%2Ftoc.json)**.
 
-7.  Una vez creado, haz clic en el botón **Go to resource**.
+7.  Una vez creado, haz clic en el botón **`Go to resource`**.
 
 8.  Recolecta la cadena de conexión del **storage account** para realizar la **autenticación** más adelante.
 
@@ -70,11 +70,11 @@ Fases del ciclo de vida de machine learning.
 > [!NOTE]
 > Guárdala en un bloc de notas temporalmente en tu computadora.
 
-9.  Para el siguiente paso, haz clic en la sección **Containers** y crea un contenedor llamado **dataml**.
+9.  Para el siguiente paso, haz clic en la sección **`Containers`** y crea un contenedor llamado **dataml**.
 
 ![storaccountcont](../images/imgl2/img4.png)
 
-10. Haz clic en el botón **Create**.
+10. Haz clic en el botón **`Create`**.
 
 > **¡TAREA FINALIZADA!**
 
@@ -82,28 +82,28 @@ Fases del ciclo de vida de machine learning.
 
 1. Nuevamente, en el buscador del portal de Azure, escribe **`Azure Machine Learning`** y haz clic en el servicio.
 
-2. Reutilizarás el **workspace** creado en el Laboratorio 1. Haz clic en el nombre.
+2. Reutiliza el **workspace** creado en el Laboratorio 1.1. Haz clic en el nombre.
 
-3. En la pantalla principal, haz clic en el botón **Launch Studio**.
+3. En la pantalla principal, haz clic en el botón **`Launch Studio`**.
 
-4. Dentro de la página principal de tu **ML Workspace**, haz clic en la sección lateral derecha **Notebooks**, debajo de **Authoring**.
+4. Dentro de la página principal de tu **ML Workspace**, haz clic en la sección lateral derecha **`Notebooks`**, debajo de **Authoring**.
 
-5. Ahora, haz clic en la opción **Files** y luego en **Create a new folder**.
+5. Ahora, haz clic en la opción **`Files`** y después en **`Create a new folder`**.
 
 ![mlnotebookfolder](../images/imgl2/img6.png)
 
-6. En la ventana emergente, coloca el nombre **`mlopsdlc-iris`** y haz clic en **Create**.
+6. En la ventana emergente, coloca el nombre **`mlopsdlc-iris`** y haz clic en **`Create`**.
 
-7. ¡Bien! Ya con la carpeta creada, pasa el puntero sobre la carpeta y se habilitarán 3 puntos al costado derecho. Haz clic para abrir el menú y selecciona **Create new file**.
+7. ¡Bien! Una vez que la carpeta ha sido la carpeta creada, pasa el puntero sobre la carpeta y se habilitarán 3 puntos al costado derecho. Haz clic para abrir el menú y selecciona **`Create new file`**.
 
 ![mlnotebookfile](../images/imgl2/img8.png)
 
 8. En la ventana emergente, define el nombre de la libreta como **`irisnotebook.ipynb`** y asegúrate de que sea de tipo **Notebook**.
 
-9. Haz clic en el botón **Create**.
+9. Haz clic en el botón **`Create`**.
 
 > [!NOTE]
-> Ahora cargarás el código que recolectará los datos.
+> Ahora carga el código que recolectará los datos.
 
 10. En la primera celda de tu libreta de Jupyter, agrega el siguiente código cambia el **connection_string** por el valor de tu bloc de notas:
 
@@ -160,17 +160,17 @@ download_dataset()
 add_headers_and_upload()
 ```
 
-11. Para ejecutar la celda da clic en el boton de **Play**
+11. Para ejecutar la celda, da clic en el botón de **`Play`**.
 
 ![mlnotebookfile](../images/imgl2/img12.png)
 
 > [!IMPORTANT]
-> El codigo viene documentado con comentarios. Pero a grandes rasgos, descargamos la fuente de datos, se ajustan los encabezados y se respalda la informacion en el Storage Account.
+> El código viene documentado con comentarios. Pero, a grandes rasgos, descargamos la fuente de datos, se ajustan los encabezados y se respalda la información en el Storage Account.
 
 > [!IMPORTANT]
-> En caso de que el codigo no corra, asegurate de tener un ambiente de computo, recuerda los pasos del laboratorio 1 para crearlo.
+> En caso de que el código no corra, asegúrate de tener un ambiente de cómputo, recuerda los pasos del Laboratorio 1.1. para crearlo.
 
-12. Resultado esperado.
+### Resultado esperado.
 
 ![mlnotebookfile](../images/imgl2/img9.png)
 
@@ -178,7 +178,7 @@ add_headers_and_upload()
 
 > **FASE 2: RECOLECCIÓN DE DATOS ¡FINALIZADA!**
 
-### **FASE 3: PREPROCESAMIENTO DE DATOS**
+### **FASE 3: PREPROCESAMIENTO DE DATOS.**
 
 ### Tarea 1. Definición de código para preprocesar datos.
 
@@ -238,30 +238,30 @@ preprocess_data(input_path, output_path)
 > [!NOTE]
 > El proceso tardará un par de segundos.
 
-4.  Si todo sale bien, el resultado será como en la siguiente imagen.
+4.  Si todo sale bien, el resultado será como en la siguiente imagen:
 
 ![mlnotebookcode2](../images/imgl2/img13.png)
 
-5.  Adicionalmente, observarás en el árbol de directorios y archivos lateral izquierdo una nueva carpeta llamada **preprocessed_data** con el contenido procesado.
+5.  Adicionalmente, puedes observar en el árbol de directorios y archivos lateral izquierdo una nueva carpeta llamada **preprocessed_data** con el contenido procesado.
 
 ![mlnotebookcode2r](../images/imgl2/img14.png)
 
 > [!NOTE]
-> Hasta ahora vamos bien; llevamos 3 fases del ciclo de vida de Machine Learning.
+> Hasta ahora vas bien; llevas tres fases del ciclo de vida de Machine Learning.
 
 > **¡TAREA FINALIZADA!**
 
 > **FASE 3: PREPROCESAMIENTO DE DATOS ¡FINALIZADA!**
 
-### **FASE 4: ENTRENAMIENTO DEL MODELO**
+### **FASE 4: ENTRENAMIENTO DEL MODELO.**
 
 ### Tarea 1. Definición de código para entrenar el modelo.
 
-1.  En este punto, repetiremos la estructura del procesamiento de datos, pero con el código para entrenar el modelo.
+1.  En este punto, repite la estructura del procesamiento de datos, pero con el código para entrenar el modelo.
 
 2.  **Agrega otra celda** como lo hiciste en la tarea anterior, debajo del **Preprocesamiento**.
 
-3.  Ahora, agrega el siguiente bloque de código que entrenará la información.
+3.  Ahora, agrega el siguiente bloque de código que entrenará la información:
 
 ```
 import os
@@ -297,11 +297,11 @@ print("Modelo entrenado y guardado en outputs/model.pkl")
 
 4.  Ejecuta la celda con el código.
 
-5.  Si todo sale bien, verás el siguiente resultado.
+5.  Si todo sale bien, obtendrás el siguiente resultado.
 
 ![mlnotebookcode3](../images/imgl2/img15.png)
 
-6.  Adicionalmente, también tendrás la carpeta **outputs** creada con los modelos entrenados.
+6.  Adicionalmente, obtendrás la carpeta **outputs** creada con los modelos entrenados.
 
 ![mlnotebookcode3r](../images/imgl2/img16.png)
 
@@ -309,7 +309,7 @@ print("Modelo entrenado y guardado en outputs/model.pkl")
 
 ### Tarea 2. Registro del modelo entrenado.
 
-1.  Ahora registraremos el modelo para su posterior implementación.
+1.  Registra el modelo para su posterior implementación.
 
 2.  **Agrega una celda** más debajo de la celda que entrenó el modelo.
 
@@ -336,28 +336,28 @@ print(f"Modelo registrado como 'iris-model' en el espacio de trabajo.")
 ```
 
 > [!NOTE]
-> Este paso nos permitira guardar el modelo combinando los archivos entrenados, asi sera mas facil implementarlo en los servidores de computo.
+> Este paso te permitirá guardar el modelo combinando los archivos entrenados, así será más fácil implementarlo en los servidores de cómputo.
 
-4.  Ejecuta la celda con el codigo.
+4.  Ejecuta la celda con el código.
 
-5.  El resultado sera como el de la imagen.
+5.  El resultado será como el de la imagen.
 
 ![mlnotebookmodel1](../images/imgl2/img17.png)
 
 > [!NOTE]
-> El modelo se registra en tu **Workspace** en la seccion lateral izquierda llamada **Models**.
+> El modelo se registra en tu **Workspace** en la sección lateral izquierda llamada **Models**.
 
 > **¡TAREA FINALIZADA!**
 
 > **FASE 4: ENTRENAMIENTO DEL MODELO ¡FINALIZADA!**
 
-### **FASE 5: IMPLEMENTACIÓN DEL MODELO**
+### **FASE 5: IMPLEMENTACIÓN DEL MODELO.**
 
 ### Tarea 1. Definición del ambiente e implementación del modelo.
 
 1.  Crea un archivo que definirá las dependencias para la implementación del modelo.
 
-2.  Recuerda hacer clic en los 3 puntos del directorio **mlopsdls-iris** y seleccionar la opción **Create new file**.
+2.  Recuerda hacer clic en los tres puntos del directorio **mlopsdls-iris** y seleccionar la opción **`Create new file`**.
 
 3.  En la ventana emergente, escribe el nombre del archivo **`environment.yml`** y cambia la extensión a **Tipo Yaml**.
 
@@ -366,13 +366,13 @@ print(f"Modelo registrado como 'iris-model' en el espacio de trabajo.")
 
 ![mlnotebookmodel2](../images/imgl2/img18.png)
 
-4.  Haz clic en **Create**.
+4.  Haz clic en **`Create`**.
 
 5.  Verifica la creación del archivo en el directorio.
 
 ![mlnotebookmodel3](../images/imgl2/img19.png)
 
-6.  Ahora abre el archivo y carga la siguiente configuración que define las dependencias para el modelo a implementar.
+6.  Abre el archivo y carga la siguiente configuración que define las dependencias para el modelo a implementar:
 
 ```
 name: iris-environment
@@ -390,14 +390,14 @@ dependencies:
     - azureml-defaults
 ```
 
-7.  Da clic en la opción **Save** como lo muestra la imagen.
+7.  Da clic en la opción **`Save`**, como lo muestra la imagen.
 
 ![mlnotebookmodel4](../images/imgl2/img20.png)
 
 > [!NOTE]
 > Después de guardar el archivo, puedes cerrarlo sin problemas.
 
-8.  Ahora repite los mismos pasos para crear un archivo de tipo **Python** llamado **`score.py`**.
+8.  Repite los mismos pasos para crear un archivo de tipo **Python** llamado **`score.py`**.
 
 ![mlnotebookmodel5](../images/imgl2/img21.png)
 
@@ -432,13 +432,13 @@ def run(raw_data):
 ```
 
 > [!NOTE]
-> El contenido del archivo es necesario para indicarle a la implementacion como debe correr el modelo en el servidor.
+> El contenido del archivo es necesario para indicarle a la implementación cómo debe correr el modelo en el servidor.
 
-10.  Da clic en la opcion **Save**
+10.  Da clic en la opción **`Save`**.
 
 11.  Regresa a tu libreta llamada **irisnotebook.ipynb** y agrega otra celda.
 
-12.  En la celda copia el siguiente codigo que implementara el modelo.
+12.  En la celda, copia el siguiente código que implementará el modelo:
 
 ```
 from azureml.core import Workspace, Model, Environment
@@ -480,7 +480,7 @@ print(f"Servicio desplegado en ACI: {service.scoring_uri}")
 ```
 
 > [!NOTE]
-> El modelo tomará la información del archivo **environment** y, para este ejemplo, usaremos el servicio de **Azure Container Instances** para desplegar el modelo.
+> El modelo tomará la información del archivo **environment** y, para este ejemplo, usa el servicio de **Azure Container Instances** para desplegar el modelo.
 
 > [!NOTE]
 > El despliegue del modelo puede tardar entre **9 a 20 minutos**. Mientras tanto, puedes tomar una taza de café o té.
@@ -492,7 +492,7 @@ print(f"Servicio desplegado en ACI: {service.scoring_uri}")
 14. Copia el valor **(URL)** del parámetro **Servicio desplegado en ACI** de la implementación y **guárdalo temporalmente en tu bloc de notas**.
 
 > [!NOTE]
-> La URL será similar a esta **http://xxxxxxxxxxxxxxxxxxxx.eastus.azurecontainer.io/score**. Ten cuidado, esta URL es solo un ejemplo y no debe ser copiada directamente.
+> La URL será similar a esta **http://xxxxxxxxxxxxxxxxxxxx.eastus.azurecontainer.io/score**. ¡Ten cuidado! Esta URL es sólo un ejemplo y no debe ser copiada directamente.
 
 > **¡TAREA FINALIZADA!**
 
@@ -578,7 +578,7 @@ data = {
 
 ### Resultado esperado
 
-El resultado esperado es que no haya habido errores en ninguna de las tareas y pasos. Debemos verificar que el modelo realice las proyecciones correctas, como se muestra en la imagen. Recuerda que cambiando los datos, cambia la proyección.
+El resultado esperado es que no haya habido errores en ninguna de las tareas y pasos. Debes verificar que el modelo realice las proyecciones correctas, como se muestra en la imagen. Recuerda que cambiando los datos, cambia la proyección.
 
 ![mlnotebookmodel9](../images/imgl2/img24.png)
 
