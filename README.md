@@ -11,7 +11,7 @@ En este curso conocerás qué es MLOps, para qué sirve, las etapas de su ciclo 
 
 [Laboratorio 0. Preparación del ambiente de Azure DevOps.](./Capítulo1/LAB_Validation.md)<br>
 [Laboratorio 1.1. Configuración del Entorno de Desarrollo en Azure.](./Capítulo1/LAB_1.1.md)<br>
-[Laboratorio 1.2. Ciclo de Vida de MLOps..](./Capítulo1/LAB_1.2.md)<br>
+
 [Laboratorio 2. Implementación de CI/CD para Machine Learning.](./Capítulo2/LAB_2.md)<br>
 [Laboratorio 3.1. Despliegue de Servicio de Cómputo.](./Capítulo3/LAB_3.1.md)<br>
 [Laboratorio 3.2. Despliegue, Monitoreo y Evaluación de Modelos.](./Capítulo3/LAB_3.2.md)<br>
