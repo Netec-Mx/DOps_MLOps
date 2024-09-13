@@ -1,4 +1,4 @@
-# Curso: 
+# Curso: Custom Data Ops y MLOps.
 
 ## Descripción del curso: 
 En este curso conocerás qué es MLOps, para qué sirve, las etapas de su ciclo de vida, sus componentes, el control de versiones (GitHub), CI/CD y la orquestación de modelos.
