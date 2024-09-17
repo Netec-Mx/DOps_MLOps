@@ -107,7 +107,8 @@ Fases del ciclo de vida de machine learning.
 
 10. En la primera celda de tu libreta de Jupyter, agrega el siguiente código cambia el **connection_string** por el valor de tu bloc de notas:
 
-```import os
+```
+import os
 import pandas as pd
 import requests
 from azure.storage.blob import BlobServiceClient
