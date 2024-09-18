@@ -29,7 +29,7 @@ Al finalizar la práctica, serás capaz de:
 
 3. Autentícate con la cuenta de **Azure/Microsoft**.
 
-> **¡NOTA!**
+> **¡NOTA!**<br>
 > Si es la primera vez que usas tu cuenta, continúa con los pasos de autenticación y creación de la organización de **Azure DevOps**.
 
 4.  Una vez autenticado, crea el proyecto de la organización de Azure DevOps con el siguiente nombre: **```mlopsproject```**.
