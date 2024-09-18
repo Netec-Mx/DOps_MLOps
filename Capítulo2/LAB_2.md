@@ -425,7 +425,7 @@ steps:
 
 ![azpiperelease8](../images/imgl3/img34.png)
 
-> [!IMPORTANT]
+> > **¡IMPORTANTE!**
 > **NO** cierres la página.
 
 13. Abre otra pestaña en tu navegador y da clic en la página del portal de Azure **[AQUÍ](https://portal.azure.com/)**.
