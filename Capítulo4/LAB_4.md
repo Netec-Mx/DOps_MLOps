@@ -28,21 +28,21 @@ En esta sección, vas a entrenar un modelo de Machine Learning para predecir si 
 
 1. Dirígete al Portal de Azure e inicia sesión con tu cuenta en [Azure Portal](https://portal.azure.com/).
 
-1. En la barra de búsqueda del portal, escribe **`Machine Learning`** y selecciónalo.
+2. En la barra de búsqueda del portal, escribe **`Machine Learning`** y selecciónalo.
 
-1. Usa el **Workspace** de Azure Machine Learning **existente**, el cual fue creado previamente.
+3. Usa el **Workspace** de Azure Machine Learning **existente**, el cual fue creado previamente.
 
-1. Haz clic en **`Launch Studio`**.
+4. Haz clic en **`Launch Studio`**.
 
-1. Dentro de tu workspace, selecciona **`Notebooks`** del menú lateral izquierdo.
+5. Dentro de tu workspace, selecciona **`Notebooks`** del menú lateral izquierdo.
 
 ![mlnote](../images/imgl5/img1.png)
 
-1. En tu carpeta **raíz**, haz clic en los tres puntos para expandir el menú y selecciona **`Create new folder`**.
+6. En tu carpeta **raíz**, haz clic en los tres puntos para expandir el menú y selecciona **`Create new folder`**.
 
 ![mlnote1](../images/imgl5/img2.png)
 
-1. Escribe el siguiente nombre: **`titanic-model`**, y haz clic en el botón **`Create`**.
+7. Escribe el siguiente nombre: **`titanic-model`**, y haz clic en el botón **`Create`**.
 
 ![mlnot2](../images/imgl6/img1.png)
 
@@ -208,10 +208,10 @@ env.register(workspace=ws)
 > [!NOTE]
 > El resultado de la creación del entorno sera representado en **JSON**, mientras no marque algún error puedes avanzar con los demás pasos.
 
-17. Despliega el modelo como un servicio web utilizando Azure Container Instances (ACI). Esto permitirá realizar predicciones a través de una API.
+17. Despliega el modelo como un servicio web utilizando **Azure Container Instances (ACI)**. Esto permitirá realizar predicciones a través de una API.
 
 ```
-from azureml.core.model import InferenceConfig
+from azureml.core.model import InferenceConfig, Model
 from azureml.core.webservice import AciWebservice, Webservice
 import os
 
@@ -251,14 +251,27 @@ inference_config = InferenceConfig(entry_script="score.py", environment=env)
 # Configurar el despliegue en ACI
 aci_config = AciWebservice.deploy_configuration(cpu_cores=1, memory_gb=1)
 
+# Nombre del servicio
+service_name = "titanic-service"
+
+# Comprobar si el servicio ya existe
+try:
+    service = Webservice(workspace=ws, name=service_name)
+    print(f"El servicio {service_name} ya existe. Eliminando...")
+    service.delete()
+    print(f"Servicio {service_name} eliminado.")
+except Exception as e:
+    print(f"El servicio {service_name} no existe. Continuando con el despliegue...")
+
 # Desplegar el modelo como un servicio web
 service = Model.deploy(workspace=ws,
-                       name="titanic-service",
+                       name=service_name,
                        models=[model],
                        inference_config=inference_config,
                        deployment_config=aci_config)
 service.wait_for_deployment(show_output=True)
 
+# Obtener la URL del servicio
 print(f"Service URL: {service.scoring_uri}")
 ```
 
@@ -270,7 +283,7 @@ import json
 
 # Datos de ejemplo para la predicción (pasajero probable de sobrevivir)
 data = {
-    "data": [[1, 29.0, 0, 0, 100.0]]  # Ejemplo de un pasajero en primera clase, 29 años, sin hermanos, sin padres/hijos, tarifa 100.0
+    "data": [[3, 50.0, 1, 0, 50.0]]  # Ejemplo de un pasajero en tercera clase, 50 años, con hermanos, sin padres/hijos, tarifa 50.0
 }
 
 # URL del servicio web
@@ -358,7 +371,7 @@ for data in test_data:
 
 ![mlnot3](../images/imgl6/img11.png)
 
-3.  Con el endpoint desplegado, obtendrás la **URL** de **Application Insights**. Selecciona tu endpoint; `recuerda ir al menú lateral izquierdo y seleccionar Endpoints.`
+3.  Con el endpoint desplegado, obtendrás la **URL** de **Application Insights**. Selecciona tu endpoint; `recuerda ir al menú lateral izquierdo y seleccionar **Endpoints.**`
 
 4.  Dentro de las propiedades, busca la **URL** hasta el final de la pantalla y da **clic**.
 
