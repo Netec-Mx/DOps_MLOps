@@ -194,6 +194,7 @@ from azureml.core import Workspace, Model, Environment
 from azureml.core.webservice import AciWebservice, Webservice
 from azureml.core.model import InferenceConfig
 from azureml.core.authentication import InteractiveLoginAuthentication
+from azureml.exceptions import WebserviceException
 
 # Conectar al Workspace
 ws = Workspace.from_config()
