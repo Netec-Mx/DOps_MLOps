@@ -39,9 +39,9 @@ En esta tarea, prepara todo lo necesario para entrenar y desplegar el modelo, in
 | Parámetro       | Valores |
 |-----------------|---------|
 | Subscription    | Selecciona la **suscripción** de tu cuenta o la que se asignó para el curso. |
-| Resource Group  | Selecciona **mlrg**. |
+| Resource Group  | Selecciona **mlrg-XXXX**. |
 | Cluster details | Selecciona **Dev/Test**. |
-| Kubernetes cluster name | Escribe **kubemlcluster**. |
+| Kubernetes cluster name | Escribe **kubemlcluster-XXXX**. |
 | Región | Selecciona **East US**. |
 
 > [!NOTE]
@@ -51,7 +51,7 @@ En esta tarea, prepara todo lo necesario para entrenar y desplegar el modelo, in
 
 6. En la sección **Node Pools**, haz clic en el nombre **`agentpool`**.
 
-7. Cambia la propiedad **Minimum node count** de **2** a **3**.
+7. Cambia la propiedad **Minimum node count** de **1** a **2**.
 
 8. Verifica que esté seleccionado **`Autoscale - Recommended`** y marca la casilla **Enable public IP per node**.
 
@@ -145,7 +145,7 @@ df.head()
 
 ![azmlnote1](../images/imgl4/img17.png)
 
-6. Agrega otra celda más y escribe el siguiente código para convertir el objetivo (target) del dataset en una variable binaria:
+6. **Agrega otra celda más** y escribe el siguiente código para convertir el objetivo (target) del dataset en una variable binaria:
 
 ```
 # Convertir el target a binario: 1 si el valor es mayor a 140, 0 en caso contrario
@@ -157,7 +157,7 @@ df['target'].value_counts()
 
 ![azmlnote1](../images/imgl4/img18.png)
 
-7. Ejecuta el siguiente código en otra celda que guarda el dataset procesado en un archivo CSV:
+7. Ejecuta el siguiente código en **otra celda** que guarda el dataset procesado en un archivo CSV:
 
 ```
 # Guardar el dataset en un archivo CSV
@@ -287,6 +287,7 @@ registered_model = Model.register(workspace=workspace,
 
 
 ```
+score_script = """
 import joblib
 import numpy as np
 from azureml.core.model import Model
@@ -321,7 +322,7 @@ def run(raw_data):
     except Exception as e:
         result = str(e)
         return json.dumps({"error": result})
-'''
+"""
 
 with open('score.py', 'w') as f:
     f.write(score_script)
@@ -375,7 +376,7 @@ dependencies:
 workspace = Workspace.from_config()
 
 # Crear y registrar el entorno
-env = Environment.from_conda_specification(name='diabetes-env', file_path='environment.yml')
+env = Environment.from_conda_specification(name='diabetes-env', file_path='environment.yaml')
 env.register(workspace)
 ```
 
@@ -441,11 +442,11 @@ print('Respuesta del servicio:')
 print(result)
 ```
 
-8. Para obtener el valor de **TU_ENDPOINT_URL**, debes ir a la sección de **ENDPOINTS**.
+8. Para obtener el valor de **TU_ENDPOINT_URL**, debes ir a la sección lateral izquierda **ENDPOINTS**.
 
 ![azmlnote1](../images/imgl4/img28.png)
 
-9. Dentro del servicio, en la parte inferior, encontrarás la URL **REST endpoint**. Cópiala y reemplázala en la **línea 5** del código de la prueba.
+9. Dentro del servicio, en la **parte inferior**, encontrarás la URL **REST endpoint**. Cópiala y reemplázala en la **línea 5** del código de la prueba.
 
 ![azmlnote1](../images/imgl4/img29.png)
 
