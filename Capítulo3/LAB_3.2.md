@@ -190,17 +190,44 @@ inference_config = InferenceConfig(entry_script="score.py", environment=env)
 8. En la **siguiente celda**, despliega el modelo como un servicio web. Escribe el siguiente código:
 
 ```
+from azureml.core import Workspace, Model, Environment
 from azureml.core.webservice import AciWebservice, Webservice
+from azureml.core.model import InferenceConfig
+from azureml.core.authentication import InteractiveLoginAuthentication
+
+# Conectar al Workspace
+ws = Workspace.from_config()
+
+# Nombre del servicio
+service_name = "california-housing-service"
+
+# Verificar si ya existe un servicio con el mismo nombre y eliminarlo
+try:
+    existing_service = Webservice(name=service_name, workspace=ws)
+    print(f"Servicio '{service_name}' ya existe. Procediendo a eliminarlo...")
+    existing_service.delete()
+    print(f"Servicio '{service_name}' eliminado.")
+except WebserviceException:
+    print(f"No se encontró un servicio con el nombre '{service_name}'. Creando uno nuevo...")
+
+# Configurar el entorno de inferencia
+env = Environment(name="deployment-env")
+env.python.conda_dependencies.add_pip_package("scikit-learn")
+env.python.conda_dependencies.add_pip_package("joblib")
+
+# Configurar la inferencia
+inference_config = InferenceConfig(entry_script="score.py", environment=env)
 
 # Configurar el despliegue
 deployment_config = AciWebservice.deploy_configuration(cpu_cores=1, memory_gb=1)
 
 # Desplegar el modelo
 service = Model.deploy(workspace=ws,
-                       name="california-housing-service",
+                       name=service_name,
                        models=[model],
                        inference_config=inference_config,
-                       deployment_config=deployment_config)
+                       deployment_config=deployment_config,
+                       overwrite=True)  # Usar overwrite para reemplazar cualquier servicio existente con el mismo nombre
 service.wait_for_deployment(show_output=True)
 
 # Obtener la URL del servicio
