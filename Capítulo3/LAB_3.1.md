@@ -53,9 +53,11 @@ En esta tarea, prepara todo lo necesario para entrenar y desplegar el modelo, in
 
 7. Cambia la propiedad **Minimum node count** de **1** a **2**.
 
-8. Verifica que esté seleccionado **`Autoscale - Recommended`** y marca la casilla **Enable public IP per node**.
+**NOTA** La imagen de abajo dira que los nodos son de **3 a 5** pero para efectos de laboratorio de **1 a 2**.
 
-9. Haz clic en el botón **`Update`**.
+9. Verifica que esté seleccionado **`Autoscale - Recommended`** y marca la casilla **Enable public IP per node**.
+
+10. Haz clic en el botón **`Update`**.
 
 ![azkube1](../images/imgl4/img2.png) 
 
@@ -108,7 +110,7 @@ az k8s-extension create --name azureml --extension-type Microsoft.AzureML.Kubern
 
 ![azmlcompute3](../images/imgl4/img7.png)
 
-Con esta tarea, has experimentado cómo crear un clúster de Azure Kubernetes Service y cómo asociarlo al Workspace de Azure Machine Learning. Para el entrenamiento, usaremos otro clúster de tipo Kubernetes. Esta tarea fue demostrativa.
+**Con esta tarea, has experimentado cómo crear un clúster de Azure Kubernetes Service y cómo asociarlo al Workspace de Azure Machine Learning. Para el entrenamiento, usaremos otro clúster de tipo Kubernetes. Esta tarea fue demostrativa.**
 
 > **¡TAREA FINALIZADA!**
 
@@ -387,8 +389,24 @@ env.register(workspace)
 6. Ahora, en otra celda, coloca el código que iniciará la implementación del modelo:
 
 ```
+from azureml.core import Workspace, Model, Environment
 from azureml.core.webservice import AciWebservice, Webservice
 from azureml.core.model import InferenceConfig
+
+# Conectar al Workspace
+workspace = Workspace.from_config()
+
+# Nombre del servicio
+service_name = "diabetes-service"
+
+# Verificar si ya existe un servicio con el mismo nombre y eliminarlo
+try:
+    existing_service = Webservice(name=service_name, workspace=workspace)
+    print(f"Servicio '{service_name}' ya existe. Procediendo a eliminarlo...")
+    existing_service.delete()
+    print(f"Servicio '{service_name}' eliminado.")
+except Exception as e:
+    print(f"No se encontró un servicio con el nombre '{service_name}' o ocurrió un error: {e}. Creando uno nuevo...")
 
 # Configurar el script de inferencia
 inference_config = InferenceConfig(entry_script='score.py', environment=env)
@@ -398,14 +416,17 @@ aci_config = AciWebservice.deploy_configuration(cpu_cores=1, memory_gb=1)
 
 # Desplegar el modelo
 service = Model.deploy(workspace=workspace,
-                       name='diabetes-service',
+                       name=service_name,
                        models=[registered_model],
                        inference_config=inference_config,
                        deployment_config=aci_config,
                        overwrite=True)
+
 service.wait_for_deployment(show_output=True)
 
+# Imprimir el estado del servicio
 print("Service state:", service.state)
+print("Service URL:", service.scoring_uri)
 ```
 
 > [!NOTE]
@@ -413,7 +434,7 @@ print("Service state:", service.state)
 
 ![azmlnote1](../images/imgl4/img27.png)
 
-7. Realiza la prueba del modelo implementado con el siguiente código. El resultado será: **No tiene diabetes**.
+7. Realiza la prueba del modelo implementado con el siguiente código. El resultado será: **No tiene diabetes** **pero puede variar el resultado**.
 
 ```
 import requests
@@ -490,9 +511,11 @@ print(result)
 
 13. Configura los siguientes datos como aparecen en la imagen y haz clic en el botón **`Next`**:
 
+**NOTA** El node puede variar dependiendo la demanda y saturación de los recursos, puedes usar alternativamente **DS3**.
+
 ![vsclocal3](../images/imgl4/img11.png)
 
-14. En la siguiente página, configura los datos como aparecen en la imagen y haz clic en el botón **`Create`**:
+14. En la siguiente página, configura los datos como aparecen en la imagen solo reduce **Number of nodes** a **1** y haz clic en el botón **`Create`**:
 
 ![vsclocal3](../images/imgl4/img12.png)
 
@@ -587,6 +610,44 @@ except json.JSONDecodeError:
 > **¡TAREA FINALIZADA!**
 
 Has logrado implementar el modelo tanto mediante Azure Container Instances como Azure Kubernetes Service.
+
+> **¡ELIMINAR ENDPOINT!**
+
+1.  Agrega otra celda mas para eliminar el endpoint creado, copia el siguiente contenido a la celda y ejecutala.
+```
+from azureml.core import Workspace
+from azureml.core.webservice import Webservice
+
+# Conectar al Workspace
+ws = Workspace.from_config()
+
+# Nombre del servicio a eliminar
+service_name = "diabetes-service"
+
+# Función para eliminar un servicio si existe
+def delete_service_if_exists(service_name, workspace):
+    try:
+        # Obtener el servicio
+        service = Webservice(workspace, name=service_name)
+        
+        # Verificar el estado del servicio y eliminar si está en estado Healthy
+        if service.state == 'Healthy':
+            print(f"Eliminando el servicio '{service_name}'...")
+            service.delete()
+            print(f"Servicio '{service_name}' eliminado exitosamente.")
+        else:
+            print(f"El servicio '{service_name}' no está en estado Healthy y no se eliminará.")
+    
+    except Exception as e:
+        # Si el servicio no existe, se captura una excepción
+        if 'Webservice' in str(e):
+            print(f"Servicio '{service_name}' no encontrado. No se eliminará.")
+        else:
+            print(f"Error al eliminar el servicio '{service_name}': {str(e)}")
+
+# Ejecutar la función para eliminar el servicio
+delete_service_if_exists(service_name, ws)
+```
 
 ### Resultado esperado
 El resultado final será verificar que ambas implementaciones den los resultados correctos de la predicción.
