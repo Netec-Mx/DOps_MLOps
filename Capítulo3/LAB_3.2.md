@@ -240,7 +240,7 @@ print(f"Service URL: {service.scoring_uri}")
 9. En la siguiente celda, agrega el siguiente código para la validación del modelo:
 
 > [!IMPORTANT]
-> **Esta prueba fallará es el estado deseado**, pero puedes enviar los logs a los servicios de monitoreo correspondientes. Recuerda cambiar el valor de **TU_URL** en la línea **5** del código de prueba por la URL de la celda anterior.
+> **Esta prueba dara un resultado demostrativo**, pero puedes enviar los logs a los servicios de monitoreo correspondientes. Recuerda cambiar el valor de **TU_URL** en la línea **5** del código de prueba por la URL de la celda anterior.
 
 ```
 import requests
@@ -295,7 +295,7 @@ Has entrenado un modelo de regresión, lo has registrado en tu Workspace y confi
 
 Dentro de esta tarea, explora la implementación de la herramienta Application Insights y la creación de un workbook de monitoreo con métricas de rendimiento.
 
-1. **Ajusta el código** de implementación del endpoint, el cual debe ser **tu última celda**. Agrega el siguiente código; puedes apoyarte en la imagen.
+1. **Ajusta el código** de implementación del endpoint, el cual debe ser **tu penultima celda**. Agrega el siguiente código; puedes apoyarte en la imagen **puede estar en una linea diferente posiblemente 30**.
 
 ```
 enable_app_insights=True
@@ -314,7 +314,7 @@ enable_app_insights=True
 > [!IMPORTANT]
 > Adicionalmente, puedes copiar la **URL** de la celda de implementación del endpoint y pegarla en una pestaña de tu navegador. **Ya sea la URL o el código de prueba, ejecútalo varias veces para generar los logs correspondientes.**
 
-3. Con el nuevo endpoint desplegado, obtendrás la **URL**. Selecciona tu endpoint. `Recuerda ir al menú lateral izquierdo y seleccionar *Endpoints*.`
+3. Con el nuevo endpoint desplegado, obtendrás la **URL**. Selecciona tu endpoint. `Recuerda ir al menú lateral izquierdo y seleccionar **Endpoints**.`
 
 4. Dentro de las propiedades, busca la **URL** hasta el final de la pantalla y da **clic**.
 
@@ -326,7 +326,7 @@ enable_app_insights=True
 
 ![mlnot4](../images/imgl5/img10.png)
 
-7. Esta es una lista de opciones para investigar; todas las encontrarás en el menú lateral izquierdo.
+7. Esta es una lista de opciones para investigar; todas las encontrarás en el menú lateral izquierdo en la sección **Investigate**.
 
 - **Application map:** Gráfico telemétrico de las llamadas a tu endpoint.
 
