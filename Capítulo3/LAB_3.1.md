@@ -614,6 +614,7 @@ Has logrado implementar el modelo tanto mediante Azure Container Instances como 
 > **¡ELIMINAR ENDPOINT!**
 
 1.  Agrega otra celda mas para eliminar el endpoint creado, copia el siguiente contenido a la celda y ejecutala.
+
 ```
 from azureml.core import Workspace
 from azureml.core.webservice import Webservice
