@@ -328,12 +328,13 @@ pool:
 steps:
 - task: UsePythonVersion@0
   inputs:
+# CAMBIAR ESTE VALOR SI LA PRIMERA VEZ FALLA 3.11
     versionSpec: '3.x'
     addToPath: true
 
 # Paso para instalar distutils y dependencias
 - script: |
-    udo apt-get update
+    sudo apt-get update
     sudo apt-get install -y python3-distutils
     python -m pip install --upgrade pip setuptools wheel
     pip install -r requirements.txt
