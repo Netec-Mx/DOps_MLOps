@@ -488,6 +488,45 @@ Este es un ejemplo sobre la creación de reportes de modelos de machine learning
 
 > **¡TAREA FINALIZADA!**
 
+> **¡ELIMINAR ENDPOINT!**
+
+1.  Agrega otra celda mas para eliminar el endpoint creado, copia el siguiente contenido a la celda y ejecutala.
+
+```
+from azureml.core import Workspace
+from azureml.core.webservice import Webservice
+
+# Conectar al Workspace
+ws = Workspace.from_config()
+
+# Nombre del servicio a eliminar
+service_name = "titanic-service"
+
+# Función para eliminar un servicio si existe
+def delete_service_if_exists(service_name, workspace):
+    try:
+        # Obtener el servicio
+        service = Webservice(workspace, name=service_name)
+        
+        # Verificar el estado del servicio y eliminar si está en estado Healthy
+        if service.state == 'Healthy':
+            print(f"Eliminando el servicio '{service_name}'...")
+            service.delete()
+            print(f"Servicio '{service_name}' eliminado exitosamente.")
+        else:
+            print(f"El servicio '{service_name}' no está en estado Healthy y no se eliminará.")
+    
+    except Exception as e:
+        # Si el servicio no existe, se captura una excepción
+        if 'Webservice' in str(e):
+            print(f"Servicio '{service_name}' no encontrado. No se eliminará.")
+        else:
+            print(f"Error al eliminar el servicio '{service_name}': {str(e)}")
+
+# Ejecutar la función para eliminar el servicio
+delete_service_if_exists(service_name, ws)
+```
+
 ### Resultado esperado:
 El resultado esperado del laboratorio finalmente es ver las gráficas con la información que se generó desde la implementación de tu modelo.
 
