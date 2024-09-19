@@ -350,7 +350,7 @@ from sklearn.metrics import accuracy_score, classification_report
 > [!NOTE]
 > No hay salida para la carga de librerías.
 
-4. Crea un archivo en la raíz de la libreta de Jupyter llamado **`environment.yml`** y agrega el código siguiente:
+4. Crea un archivo en la raíz de la libreta de Jupyter llamado **`environment.yaml`** y agrega el código siguiente:
 
 ```
 name: diabetes-env
