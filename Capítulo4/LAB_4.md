@@ -28,21 +28,21 @@ En esta sección, vas a entrenar un modelo de Machine Learning para predecir si 
 
 1. Dirígete al Portal de Azure e inicia sesión con tu cuenta en [Azure Portal](https://portal.azure.com/).
 
-2. En la barra de búsqueda del portal, escribe **`Machine Learning`** y selecciónalo.
+1. En la barra de búsqueda del portal, escribe **`Machine Learning`** y selecciónalo.
 
-3. Usa el **Workspace** de Azure Machine Learning **existente**, el cual fue creado previamente.
+1. Usa el **Workspace** de Azure Machine Learning **existente**, el cual fue creado previamente.
 
-4. Haz clic en **`Launch Studio`**.
+1. Haz clic en **`Launch Studio`**.
 
-5. Dentro de tu workspace, selecciona **`Notebooks`** del menú lateral izquierdo.
+1. Dentro de tu workspace, selecciona **`Notebooks`** del menú lateral izquierdo.
 
 ![mlnote](../images/imgl5/img1.png)
 
-6. En tu carpeta **raíz**, haz clic en los tres puntos para expandir el menú y selecciona **`Create new folder`**.
+1. En tu carpeta **raíz**, haz clic en los tres puntos para expandir el menú y selecciona **`Create new folder`**.
 
 ![mlnote1](../images/imgl5/img2.png)
 
-7. Escribe el siguiente nombre: **`titanic-model`**, y haz clic en el botón **`Create`**.
+1. Escribe el siguiente nombre: **`titanic-model`**, y haz clic en el botón **`Create`**.
 
 ![mlnot2](../images/imgl6/img1.png)
 
@@ -52,7 +52,7 @@ En esta sección, vas a entrenar un modelo de Machine Learning para predecir si 
 
 9. Haz clic en el botón **`Create`**.
 
-10. En el cuaderno, ejecuta la siguiente celda para instalar las librerías requeridas y conectar al Workspace:
+10. En el cuaderno, ejecuta la **siguiente celda** para instalar las librerías requeridas y conectar al Workspace:
 
 ```
 # Importar las librerías necesarias
@@ -70,7 +70,7 @@ ws = Workspace.from_config()
 print("Workspace cargado:", ws.name)
 ```
 
-11. En el cuaderno, ejecuta la siguiente celda para descargar la información:
+11. En el cuaderno, ejecuta la **siguiente celda** para descargar la información:
 
 ```
 import pandas as pd
@@ -90,7 +90,7 @@ df.head()
 
 ![mlnot3](../images/imgl6/img3.png)
 
-12. Carga el dataset **Titanic** desde un archivo CSV y regístralo en el workspace de Azure Machine Learning para que esté disponible en futuras ejecuciones si es necesario.
+12. Carga el dataset **Titanic** desde un archivo CSV y regístralo en el workspace de Azure Machine Learning para que esté disponible en futuras ejecuciones si es necesario si te aparece un **Warning** puedes omitirlo por el momento.
 
 ```
 from azureml.core import Dataset
