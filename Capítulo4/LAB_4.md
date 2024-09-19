@@ -287,7 +287,7 @@ data = {
 }
 
 # URL del servicio web
-scoring_uri = service.scoring_uri
+scoring_uri = "TU_URL"
 
 # Realizar la solicitud de predicción
 headers = {"Content-Type": "application/json"}
@@ -311,7 +311,7 @@ data = {
 }
 
 # URL del servicio web
-scoring_uri = service.scoring_uri
+scoring_uri = "TU_URL"
 
 # Realizar la solicitud de predicción
 headers = {"Content-Type": "application/json"}
@@ -352,6 +352,8 @@ print("Application Insights habilitado para el servicio web.")
 ```
 import requests
 import json
+
+scoring_uri = "TU_URL"
 
 # Datos de ejemplo para generar varias predicciones
 test_data = [
@@ -395,7 +397,7 @@ requests
 ![mlnot4](../images/imgl6/img14.png)
 
 > [!IMPORTANT]
-> **Los siguientes pasos serán de lectura solamente, ya que, si no tienes una cuenta empresarial para autenticarte en Azure y Power BI, no podrás autenticarte ni crear los reportes.**
+> **Los siguientes pasos serán de lectura solamente, ya que, si no tienes una cuenta empresarial para autenticarte en Azure y Power BI, no podrás autenticarte ni crear los reportes. PUEDE TOMARLOS COMO REFERENCIA Y AVANZAR A LA TAREA #3**
 
 9.  Abre la aplicación **Power BI Desktop** en tu computadora o navegador web.
 
