@@ -127,12 +127,13 @@ model = Model.register(model_path="model.pkl",  # Ruta al archivo del modelo
 
 5.  Clic en el boton **`Create`**.
 
-6.  Dentro del archivo escribe el siguiente código que define cómo se cargará el modelo y se realizarán las predicciones y guárdalo.
+6.  Dentro del archivo escribe/copia el siguiente código que define cómo se cargará el modelo y se realizarán las **predicciones y guárdalo.**
 
 ```
 import joblib
 import numpy as np
 from azureml.core.model import Model
+import json
 
 def init():
     global model
@@ -141,20 +142,33 @@ def init():
 
 def run(raw_data):
     try:
-        # Intentar decodificar los datos de entrada
-        data = raw_data['data']
-        if isinstance(data, str):
-            import json
-            data = json.loads(data)
+        # Asegurarse de que raw_data es un string JSON y convertirlo a un diccionario
+        if isinstance(raw_data, str):
+            data = json.loads(raw_data)
+        else:
+            data = raw_data
         
+        # Verificar que 'data' esté en el formato esperado
+        if 'data' in data:
+            data = data['data']
+        elif isinstance(data, list):
+            data = data
+        else:
+            raise ValueError("Formato de datos no reconocido.")
+        
+        # Convertir los datos a un array numpy
         data = np.array(data)
+        
+        # Realizar la predicción
         result = model.predict(data)
+        
+        # Devolver los resultados
         return result.tolist()
     except Exception as e:
         return {"error": str(e)}
 ```
 
-7. De regreso a tu libreta, en la siguiente celda, escribe el siguiente código que define el entorno con las dependencias necesarias para el modelo:
+7. De regreso a tu libreta, en la **siguiente celda**, escribe el siguiente código que define el entorno con las dependencias necesarias para el modelo:
 
 ```
 from azureml.core.environment import Environment
@@ -164,15 +178,16 @@ from azureml.core.model import InferenceConfig
 env = Environment(name="deployment-env")
 env.python.conda_dependencies.add_pip_package("scikit-learn")
 env.python.conda_dependencies.add_pip_package("joblib")
+env.python.conda_dependencies.add_pip_package("numpy")
 
 # Configurar la inferencia
 inference_config = InferenceConfig(entry_script="score.py", environment=env)
 ```
 
 > [!NOTE]
-> No habrá salida; mientras no marque error, puedes continuar.
+> **No habrá salida; mientras no marque error, puedes continuar.**
 
-8. En la siguiente celda, despliega el modelo como un servicio web. Escribe el siguiente código:
+8. En la **siguiente celda**, despliega el modelo como un servicio web. Escribe el siguiente código:
 
 ```
 from azureml.core.webservice import AciWebservice, Webservice
@@ -193,12 +208,12 @@ print(f"Service URL: {service.scoring_uri}")
 ```
 
 > [!NOTE]
-> Recuerda que puede tardar varios minutos; espera el despliegue.
+> Recuerda que **puede tardar varios minutos**; espera el despliegue.
 
 9. En la siguiente celda, agrega el siguiente código para la validación del modelo:
 
 > [!IMPORTANT]
-> Esta prueba fallará, pero puedes enviar los logs a los servicios de monitoreo correspondientes. Recuerda cambiar el valor de **TU_URL** en la línea **5** del código de prueba por la URL de la celda anterior.
+> **Esta prueba fallará es el estado deseado**, pero puedes enviar los logs a los servicios de monitoreo correspondientes. Recuerda cambiar el valor de **TU_URL** en la línea **5** del código de prueba por la URL de la celda anterior.
 
 ```
 import requests
@@ -226,7 +241,7 @@ response = requests.post(endpoint_url, headers=headers, data=json.dumps(data))
 # Verificar el estado de la respuesta
 if response.status_code == 200:
     predictions = response.json()
-    print("Contenido de predictions:", "No puedo atenderte por el momento")
+    print("Contenido de predictions:", predictions)  # Mostrar la respuesta completa para depuración
     
     if isinstance(predictions, list):
         print("Predicciones de valores de las casas:")
@@ -237,7 +252,7 @@ if response.status_code == 200:
             except ValueError:
                 print(f"Ejemplo {i + 1}: Valor de predicción no válido")
     elif isinstance(predictions, dict) and 'error' in predictions:
-        print(f"Error en la predicción: Tengo un Problema")
+        print(f"Error en la predicción: {predictions['error']}")
     else:
         print("Formato de respuesta no esperado")
 else:
@@ -253,7 +268,7 @@ Has entrenado un modelo de regresión, lo has registrado en tu Workspace y confi
 
 Dentro de esta tarea, explora la implementación de la herramienta Application Insights y la creación de un workbook de monitoreo con métricas de rendimiento.
 
-1. Ajusta el código de implementación del endpoint, el cual debe ser tu última celda. Agrega el siguiente código; puedes apoyarte en la imagen.
+1. **Ajusta el código** de implementación del endpoint, el cual debe ser **tu última celda**. Agrega el siguiente código; puedes apoyarte en la imagen.
 
 ```
 enable_app_insights=True
